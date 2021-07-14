@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="headerfiles">
+	<title>School managment</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
+</head>
+
+<body>
+	<header class="navbar" th:fragment="header">
+		<a class="logo" href="#">Logo</a>
+		<div class="navbar__right">
+			<a href="#">Entrar</a>
+			<a href="#">Salir</a>
+			<div />
+	</header>
+	
+
+
+	<aside class="sidebar" th:fragment="aside">
+		<ul>
+			<li class="sidebar-line">
+				<a class="sidebar-link-title" href="#">Estudiantes</a>
+				<ul>
+					<li><a class="sidebar-link" href="/alumno/nuevo">Cargar nuevo estudiante</a></li>
+					<li><a class="sidebar-link" href="/alumno">Mostrar lista de estudiantes</a></li>
+				</ul>
+			</li>
+			<li class="sidebar-line">
+				<a class="sidebar-link-title" href="#">Cursos</a>
+				<ul>
+					<li><a class="sidebar-link" href="/curso/nuevo">Cargar nuevo curso</a></li>
+					<li><a class="sidebar-link" href="/curso">Mostrar lista de cursos</a></li>
+				</ul>
+			</li>
+			<li class="sidebar-line">
+				<a class="sidebar-link-title" href="#">Materias</a>
+				<ul>
+					<li><a class="sidebar-link" href="/materia/nuevo">Cargar materia nueva</a></li>
+					<li><a class="sidebar-link" href="/materia">Mostrar lista de materias</a></li>
+				</ul>
+			</li>
+			<li class="sidebar-line">
+				<a class="sidebar-link-title" href="#">Examenes</a>
+				<ul>
+					<li><a class="sidebar-link" href="#">Cargar nuevo examen</a></li>
+					<li><a class="sidebar-link" href="#">Mostrar lista de examenes</a></li>
+				</ul>
+			</li>
+
+		</ul>
+	</aside>
+
+
+
+</body>
+
+</html>

@@ -1,150 +1,100 @@
-<!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
-<link th:href="@{/css/style.css}" rel="stylesheet">
-
-<title>Home</title>
+<head th:insert="fragments :: headerfiles">
 </head>
+
 <body>
-
-
-
-
-	<header th:replace="/layouts/header :: header"></header>
-
-	<div class="container">
+	<div th:replace="fragments :: header"></div>
 	
-		<div class="container mb-5">
-			<div class="show-case-2">
-				<h1 class="text-center text-uppercase pt-5 font-weight-bold">Estudiantes</h1>
-			</div>
-		</div>
-		
-		<div class="row">
-		<div class="col-md-8 d-block m-auto">
 
-			<form class=" mb-4 px-4 py-4 bg-pv--form rounded gam-overflow" th:action="@{/alumnos/busqueda}"
-				th:object="${form}" th:method="POST">
-				<div class="row d-flex justify-content-center">
-
-					<div class="form-group col-md-5">
-
-						<label for="nombreCategoria">DNI</label> <input type="number" class="form-control"
-							id="nombreCategoria" th:field=*{student.dni}>
-					</div>
-					<div class="form-group col-md-5">
-						<label for="precioProducto">Nombre</label> <input type="text" class="form-control"
-							id="precioProducto" th:field=*{student.name}>
-					</div>
-					<div class="form-group col-md-5">
-						<label for="sur">Apellido</label>
-						<input type="text" class="form-control"
-							id="sur" th:field=*{student.surname}>
-					</div>
-					<div class="form-group col-md-5">
-
-						<label for="asd">Edad</label> <input type="number" class="form-control"
-							id="asd" th:field=*{year}>
-					</div>
-					
-					
-					<label for="turn">Estado</label>
-														<select id="turn"
-															th:field="*{student.status}"
-															class="form-control">
-															<option value=""></option>
-															<option value="Cursando">Cursando</option>
-															<option value="Recibido">Recibido</option>
-															<option value="Abandono">Abandono</option>
-															<option value="Repitiendo">Repitiendo</option>
-														</select>
-					
-					
-					
-					
-					<div class="form-group col-md-5" style="margin-top: 0.42rem;">
-						<button type="submit" class="btn btn-success mt-4 ">Buscar</button>
-					</div>
-				</div>
-			</form>
-		</div>
-		
-	<div class="container">
-		<div class="col-md-10 d-block m-auto rounded">
-		
-
-			
-			<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th >DNI</th>
-      <th >Nombre</th>
-      <th >Apellido</th>
-      <th >Nacimiento</th>
-      <th >Edad</th>
-      <th >Curso</th>
-      <th >Turno</th>
-      <th >Estado</th>
-      <th >Previas</th>
-      <th>Observaciones</th>
-      <th >Acciones</th>
-      
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="stud : ${students}">
-      <td th:text="${stud.dni}"></td>
-      <td th:text="${stud.name}"></td>
-      <td th:text="${stud.surname}"></td>
-      <td th:text="${stud.dateOfBirth}"></td>
-      <td th:text="${stud.age}"></td>
-      <td th:text="${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.name}+' '+
-      ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.division}+' '+
-      ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.ciclo}"></td>
-      <td th:text="${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.turn}"></td>
-      <td th:text="${stud.status}"></td>
-      <td ></td>
-      <td th:text="${stud.observacion}"></td>
-      <td><a class="btn btn-primary" th:href="@{/alumno/rac/}+${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button">VER</a></td>
-
-    </tr>
-  </tbody>
-</table>
-
-
-		</div>
-		</div>
+	<div th:replace="fragments :: aside">
 	</div>
-	<footer th:replace="/layouts/footer :: footer"></footer>
-
-
-	<!-- Optional JavaScript; choose one of the two! -->
-
-	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-		crossorigin="anonymous"></script>
-
-	<!-- Option 2: Separate Popper and Bootstrap JS -->
-	<!--
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    -->
+	
+	 <main class="main">
+        <div class="wrapper">
+            <form th:action="@{/alumnos/busqueda}" method="POST"
+					th:object="${form}" class="form">
+                <h3 class="form-title">Busqueda de estudiantes</h3>
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="nombres">Nombre/s: </label>
+                        <input type="text" id="nombres" th:field="*{student.name}">
+                    </div>
+                    <div class="form-item">                        
+                        <label for="apellidos">Apellido/s: </label>
+                        <input type="text" id="apellidos" th:field="*{student.surname}">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="form-item">
+                        <label for="dni">DNI: </label>
+                        <input type="number" id="dni" th:field="*{student.dni}">
+                    </div>
+                     <div class="form-item">
+                        <label for="edad">Edad: </label>
+                        <input type="number" id="edad" th:field="*{year}">
+                    </div>                
+                </div>
+                <div class="form-group">
+                    <div class="form-item">
+                    	<label for="status">Estado: </label>
+						<select id="status"
+							th:field="*{student.status}"
+							class="form-control">
+							<option value=""></option>
+							<option value="Cursando">Cursando</option>
+							<option value="Recibido">Recibido</option>
+							<option value="Abandono">Abandono</option>
+							<option value="Repitiendo">Repitiendo</option>
+						</select>
+                    </div>                   
+                    
+                </div>
+                                             
+                <button type="submit" class="form-btn">Buscar</button>
+            </form>
+            
+            <div class="content-table">
+                <h3 class="form-title">Lista de estudiantes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th >DNI</th>
+					      <th >Nombre</th>
+					      <th >Apellido</th>
+					      <th >Nacimiento</th>
+					      <th >Edad</th>
+					      <th >Curso</th>
+					      <th >Turno</th>
+					      <th >Estado</th>
+					      <th >Previas</th>
+					      <th>Observaciones</th>
+					      <th >Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+	                      <tr th:each="stud : ${students}">
+					      <td th:text="${stud.dni}"></td>
+					      <td th:text="${stud.name}"></td>
+					      <td th:text="${stud.surname}"></td>
+					      <td th:text="${stud.dateOfBirth}"></td>
+					      <td th:text="${stud.age}"></td>
+					      <td th:text="${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.name}+' '+
+					      ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.division}+' '+
+					      ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.ciclo}"></td>
+					      <td th:text="${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.turn}"></td>
+					      <td th:text="${stud.status}"></td>
+					      <td ></td>
+					      <td th:text="${stud.observacion}"></td>
+					      <td><a class="btn btn-primary" th:href="@{/alumno/rac/}+${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button">VER</a></td>					
+					    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+	
 </body>
+
 </html>
