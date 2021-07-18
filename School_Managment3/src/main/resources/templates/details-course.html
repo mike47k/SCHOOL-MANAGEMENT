@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+
+
+	<div th:replace="fragments :: aside">
+	</div>
+
+	<main class="main">
+		<div class="wrapper">
+			<h3 class="form-title">Detalles de cursos</h3>
+
+			<div class="content-table">
+				<div th:each="period : ${courseD.coursePeriod}">
+					<div class="text-center">
+						<h1 th:text="'Periodo: '+${period.period}+' Curso:'+${period.course.name}"></h1>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Estudiantes</th>
+								<th th:each="sub : ${courseD.subjectCourse}">
+									<a th:text="${sub.subject.name}" class="btn btn-primary"
+										th:href="@{/materia/detalles/}+ ${sub.id}" role="button"></a>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="stud : ${period.student}">
+								<td><a th:text="${stud.name}" class="btn btn-primary" th:href="@{/alumno/rac/}+ ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button"></a></td>
+						<td th:each="note : ${stud.note}" th:text="${note.average}"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+			</div>
+            </div>
+        </div>
+    </main>
+	
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+	
+
+	<div th:replace="fragments :: aside">
+	</div>
+	
+	 <main class="main">
+        <div class="wrapper">
+            <h3 class="form-title" th:text="'Materia: '+${notes[0].subject.name}+' Curso: '+${notes[0].subject.subjectCourse[0].course.name}+' Turno: '+${notes[0].subject.turn}"></h3>
+            <form method="POST" th:action="@{/materia/notas/guardar/}+ ${notes[0].subject.id}"
+                th:object="${notesF}" class="form">
+                <div class="content-table">
+                <table class="table" >
+				<thead>
+					<tr>
+						<th>Estudiantes</th>
+						<th>Estado</th>
+						<th>1º Trimestre</th>
+						<th>2º Trimestre</th>
+						<th>3º Trimestre</th>
+						<th>Promedio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="note, stat : ${notes}">
+						<td >
+						<a 
+						th:text="${note.student.name}"
+						class="btn btn-primary" 
+						th:href="@{/alumno/rac/}+ ${note.student.coursePeriod[__${#lists.size(note.student.coursePeriod) - 1}__].id}" role="button"></a>
+						</td>
+						<td th:text="${note.status}"></td>
+						<td >
+						<select th:field="*{notes[__${stat.index}__].note1}">
+							<option th:each="i : ${#numbers.sequence(0, 10)}"
+							th:value="${i}" th:text="${i}"></option>
+						</select>
+						
+						<input
+						type="hidden" 
+						th:value="${note.id}" 
+						th:field="*{notes[__${stat.index}__].id}"
+						></td>
+						<td  >
+						<select th:field="*{notes[__${stat.index}__].note2}">
+							<option th:each="i : ${#numbers.sequence(0, 10)}"
+							th:value="${i}" th:text="${i}"></option>
+						</select>
+						</td>
+						<td  >
+						<select th:field="*{notes[__${stat.index}__].note3}">
+							<option th:each="i : ${#numbers.sequence(0, 10)}"
+							th:value="${i}" th:text="${i}"></option>
+						</select>
+						</td>
+						<td th:text="*{notes[__${stat.index}__].average}"></td>
+					</tr>
+				</tbody>
+				</table>
+                </div>				
+				<button type="submit" class="form-btn">Guardar</button>
+            </form>
+            
+            
+                
+            
+        </div>
+    </main>
+	
+</body>
+
+</html>
