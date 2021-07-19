@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+	
+
+	<div th:replace="fragments :: aside">
+	</div>
+	
+	 <main class="main">
+        <div class="u-wrapper">
+            <form th:action="@{/alumnos/busqueda}" method="POST"
+					th:object="${form}" class="form">
+                <h3 class="form-title">Busqueda de estudiantes</h3>
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="nombres">Nombre/s: </label>
+                        <input type="text" id="nombres" th:field="*{student.name}">
+                    </div>
+                    <div class="form-item">                        
+                        <label for="apellidos">Apellido/s: </label>
+                        <input type="text" id="apellidos" th:field="*{student.surname}">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <div class="form-item">
+                        <label for="dni">DNI: </label>
+                        <input type="number" id="dni" th:field="*{student.dni}">
+                    </div>
+                     <div class="form-item">
+                        <label for="edad">Edad: </label>
+                        <input type="number" id="edad" th:field="*{year}">
+                    </div>                
+                </div>
+                <div class="form-group">
+                    <div class="form-item">
+                    	<label for="status">Estado: </label>
+						<select id="status"
+							th:field="*{student.status}"
+							class="form-control">
+							<option value=""></option>
+							<option value="Cursando">Cursando</option>
+							<option value="Recibido">Recibido</option>
+							<option value="Abandono">Abandono</option>
+							<option value="Repitiendo">Repitiendo</option>
+						</select>
+                    </div>                   
+                    
+                </div>
+                                             
+                <button type="submit" class="form-btn">Buscar</button>
+            </form>
+            
+            <div class="content-table">
+                <h3 class="form-title">Lista de estudiantes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th >DNI</th>
+					      <th >Nombre</th>
+					      <th >Apellido</th>
+					      <th >Nacimiento</th>
+					      <th >Edad</th>
+					      <th >Curso</th>
+					      <th >Turno</th>
+					      <th >Estado</th>
+					      <th >Previas</th>
+					      <th>Observaciones</th>
+					      <th >Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+	                      <tr th:each="stud : ${students}">
+					      <td th:text="${stud.dni}"></td>
+					      <td th:text="${stud.name}"></td>
+					      <td th:text="${stud.surname}"></td>
+					      <td th:text="${stud.dateOfBirth}"></td>
+					      <td th:text="${stud.age}"></td>
+					      <td th:text="${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.name}+' '+
+					      ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.division}+' '+
+					      ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.ciclo}"></td>
+					      <td th:text="${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].course.turn}"></td>
+					      <td th:text="${stud.status}"></td>
+					      <td ></td>
+					      <td th:text="${stud.observacion}"></td>
+					      <td><a class="btn btn-primary" th:href="@{/alumno/rac/}+${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button">VER</a></td>					
+					    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+	
+	<script th:src="@{/js/app.js}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+	
+
+	<div th:replace="fragments :: aside">
+	</div>
+	
+	 <main class="main">
+        <div class="u-wrapper">            
+            <h3 class="form-title">Cursos disponibles</h3>
+            <div class="card-container">
+	            <div class="card" th:each="cos : ${courses}">
+	            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80" class="card-img-top" width="100%"
+							alt="Computadora, café, celular y apuntes" title="Curso">
+	            	<div class="card-body">
+	            		<div class="card-text">
+		            		<p class="card-p" th:text="'Curso: ' + ${cos.name}"></p>
+		            		<p class="card-p" th:text="'Turno: ' + ${cos.turn}"></p>
+	            		</div>
+						<a class="card-btn" th:href="@{/curso/detalles/}+ ${cos.id}" role="button">Ver detalles</a>
+	            	</div>
+	            </div>         
+            </div>
+        </div>
+    </main>
+	
+	<script th:src="@{/js/app.js}"></script>
+
+</body>
+
+</html>

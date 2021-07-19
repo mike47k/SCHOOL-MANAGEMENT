@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+	
+
+	<div th:replace="fragments :: aside">
+	</div>
+	
+	 <main class="main">
+        <div class="u-wrapper">
+            <h3 class="form-title" th:text="'Alumno: '+${notes[0].student.name}+' Curso Actual: '+${notes[0].student.coursePeriod[__${#lists.size(notes[0].student.coursePeriod) - 1}__].course.name}+' Turno: '+${notes[0].student.coursePeriod[__${#lists.size(notes[0].student.coursePeriod) - 1}__].course.turn}"></h3>
+            <form method="POST" th:action="@{/alumno/notas/guardar/}+ ${notes[0].student.id}"
+                th:object="${notesF}" class="form">
+                <div class="content-table">
+                <table class="table" >
+				<thead>
+					<tr>
+						<th>Materias</th>						
+						<th>1º Trimestre</th>
+						<th>2º Trimestre</th>
+						<th>3º Trimestre</th>
+						<th>Promedio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="note, stat : ${notes}">
+						<td ><a 
+						th:text="${note.subject.name}"
+						class="btn btn-primary" 
+						th:href="@{/materia/detalles/}+ ${note.subject.id}" role="button"></a></td>
+						<td >
+						<select th:field="*{notes[__${stat.index}__].note1}">
+							<option th:each="i : ${#numbers.sequence(0, 10)}"
+							th:value="${i}" th:text="${i}"></option>
+						</select>
+						
+						<input
+						type="hidden" 
+						th:value="${note.id}" 
+						th:field="*{notes[__${stat.index}__].id}"
+						></td>
+						<td  >
+						<select th:field="*{notes[__${stat.index}__].note2}">
+							<option th:each="i : ${#numbers.sequence(0, 10)}"
+							th:value="${i}" th:text="${i}"></option>
+						</select>
+						</td>
+						<td  >
+						<select th:field="*{notes[__${stat.index}__].note3}">
+							<option th:each="i : ${#numbers.sequence(0, 10)}"
+							th:value="${i}" th:text="${i}"></option>
+						</select>
+						</td>	
+					</tr>
+				</tbody>
+				</table>
+                </div>				
+				<button type="submit" class="form-btn">Guardar</button>
+            </form>
+            
+            
+                
+            
+        </div>
+    </main>
+	
+</body>
+
+</html>

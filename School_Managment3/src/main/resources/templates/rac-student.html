@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+
+
+	<div th:replace="fragments :: aside">
+	</div>
+
+	<main class="main">
+		<div class="u-wrapper">
+			<!-- INFO STUDENT -->
+			<h3 class="form-title">Información del estudiante</h3>
+			<table class="table table-info">
+			<thead>
+				<tr>
+					<th>Nombre y apellido</th>
+					<th>Curso actual</th>
+					<th>Turno</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${coursePeriod.student.name}"></td>
+					<td th:text="${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.name}"></td>
+					<td th:text="${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.turn}"></td>
+				</tr>
+			</tbody>
+			</table>
+			<!--				
+			<h3 th:text="'Nombre: '+${coursePeriod.student.name}+' Curso Actual: '+${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.name}+' Turno: '+${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.turn}"></h3>
+			-->
+			
+			<div class="container-modal-btn">
+	            <!-- Modal btn-->
+	            <button class="btn-action btn-action--green" data-open="modal1">Reinscripción </button>
+	            
+	            <!-- Modal btn-->
+	            <button class="btn-action btn-action--green" data-open="modal2">Registrar examen </button>
+			</div>
+            
+            <!--Modal content-->
+             <div class="modal" id="modal1" >
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h3 class="modal-title">Reinscripcion del alumno</h3>
+		                <i class="fas fa-times close-modal" data-close></i>
+		            </div>
+		            <form th:action="@{/alumno/curso/guardar/}+ ${coursePeriod.student.id}"
+								method="POST" th:object="${form2}" class="form--modal">
+		            
+		                    <div class="form-group">
+		                        <div class="form-item">
+		                            <label for="curso">Curso</label> 
+		                            <select id="curso"
+										th:field="*{course.id}">
+										<option th:each="cus : ${courses}" th:value="${cus.id}"
+											th:text="${cus.name}" th:selected="false">
+										</option>
+									</select> 
+										
+		                    </div>
+		                   		 <div class="form-item">                        
+		                            <label for="ye">Año</label>
+									<select id="ye" th:field="*{year}">
+									  <option th:each="year : ${#numbers.sequence( #dates.year(#dates.createNow()),2000)}"
+									      th:value="${year}" th:text="${year}">
+									  </option>
+									</select>
+		                        </div>
+		                    </div>
+		                    <div class="form-info">
+								<p class="info-name"
+									th:text=" 'Nombre: ' + ${coursePeriod.student.name}"></p>
+								<p class="info-dni"
+									th:text=" 'DNI: ' + ${coursePeriod.student.dni}">
+								</p>
+		                    </div>
+		                    <div class="form-buttons">
+		                        <button type="submit" class="form-btn--modal form-btn--save">Enviar</button>
+		                        <button class="form-btn--modal form-btn--cancel" data-cancel>Cancelar</button>
+		                    </div>
+		                    
+		            </form>
+		        </div>        
+    		</div>
+            
+            
+            <!--Modal content-->
+             <div class="modal" id="modal2" >
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h3 class="modal-title">Registrar examen</h3>
+		                <i class="fas fa-times close-modal" data-close></i>
+		            </div>
+		            <form th:action="@{/alumno/examen/guardar/}+${coursePeriod.student.id}+'/'+${coursePeriod.id}"
+								method="POST" 
+								th:object="${form}" class="form--modal">
+		            
+		                    <div class="form-group">
+		                        <div class="form-item">
+		                         	<label for="fechaExamen">Fecha</label>
+									<input id="fechaExamen" type="date" th:field="*{exam.dateExam}">									
+		                    	</div>
+		                   		 <div class="form-item">                        
+		                            <label for="notaExamen">Nota</label>
+									<input id="notaExamen" type="number" th:field="*{exam.noteExam}">
+		                        </div>
+		                    </div>
+		                    <div class=form-group>
+		                    	<div class="form-unique-item-center"> 
+		                    		<label for="materiaExamen">Materia</label> 
+		                    		<select id="materiaExamen"
+											th:field="*{subject.id}">
+											<option th:each="cus : ${coursePeriod.course.subjectCourse}" th:value="${cus.subject.id}"
+												th:text="${cus.subject.name}" th:selected="false"></option>
+									</select> 
+		                    	</div>
+		                    </div>
+		                    <div class="form-buttons">
+		                        <button type="submit" class="form-btn--modal form-btn--save">Enviar</button>
+		                        <button class="form-btn--modal form-btn--cancel" data-cancel>Cancelar</button>
+		                    </div>
+		                    
+		            </form>
+		        </div>        
+    		</div>
+            
+            
+		<!--PERIODOS-->
+			
+			<ul class="ul-periodos">
+				<li class="periodos" th:each="per, statPer : ${coursePeriod.student.coursePeriod}">
+					<a class="periodos-link" th:text="'Periodo: '+${per.period}+' Curso:'+${per.course.name}"
+					th:href="@{/alumno/rac/}+${per.id}"></a>
+				</li>
+			</ul>			
+            
+            <!--MATERIAS-->
+			<div class="content-table">
+				<form method="POST"
+					th:action="@{/alumno/notas/guardar/}+ ${coursePeriod.id}"
+					th:object="${form}">
+					<table
+						class="table">
+						<thead>
+							<tr>
+								<th>Materias</th>
+								<th>1º Trimestre</th>
+								<th>2º Trimestre</th>
+								<th>3º Trimestre</th>
+								<th>Promedio</th>
+								<th>Previas</th>
+								<th>Nota Final</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="note, stat : ${coursePeriod.course.subjectCourse}">
+								<td>
+									<a th:text="${note.subject.name}" class="btn btn-primary"
+									 th:href="@{/materia/detalles/}+ ${note.subject.id}" role="button"></a>
+								</td>
+								<td>
+									<select th:field="*{notes[__${stat.index}__].note1}">
+										<option th:each="i : ${#numbers.sequence(0, 10)}"
+										th:value="${i}" th:text="${i}">
+										</option>
+									</select>
+									<input type="hidden" th:value="${note.id}"
+										th:field="*{notes[__${stat.index}__].id}">
+								</td>
+								<td>
+									<select th:field="*{notes[__${stat.index}__].note2}">
+										<option th:each="i : ${#numbers.sequence(0, 10)}"
+												th:value="${i}" th:text="${i}">
+										</option>
+									</select>
+								</td>
+								<td>
+									<select th:field="*{notes[__${stat.index}__].note3}">
+										<option th:each="i : ${#numbers.sequence(0, 10)}"
+											th:value="${i}" th:text="${i}">
+										</option>
+									</select>
+								</td>
+								<td th:text="*{notes[__${stat.index}__].average}"></td>
+								<td >
+									<ol>
+										<li th:each="ex : ${form.notes[__${stat.index}__].exam}" th:text="'Fecha: '+${ex.dateExam}+' Nota:'+${ex.noteExam}">
+									</ol>
+																
+								</td>
+								<td th:text="*{notes[__${stat.index}__].fNote}"></td>													
+							</tr>	
+						</tbody>
+					</table>
+					<button type="submit" class="btn-action btn-action--green form-btn--table ">Guardar</button>
+					
+				</form>
+				
+				
+			</div>
+            
+            
+        </div>
+    </main>
+	<script th:src="@{/js/app.js}"></script>
+</body>
+
+</html>

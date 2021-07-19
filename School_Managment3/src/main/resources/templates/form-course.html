@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:insert="fragments :: headerfiles">
+</head>
+
+<body>
+	<div th:replace="fragments :: header"></div>
+	
+
+	<div th:replace="fragments :: aside">
+	</div>
+	
+	 <main class="main">
+        <div class="u-wrapper">
+            <form th:action="@{/curso/guardar}" method="POST"
+					th:object="${course}" class="form">
+					
+                <h3 class="form-title">Agregá un nuevo curso</h3>
+                
+                <div class="form-group">
+                    <div class="form-item">
+                    	<label for="curso">Curso: <strong class="camp-obligatorio">*</strong> </label> 
+                        <select id="curso"
+							th:field="*{name}">
+							<option value="1º">1º</option>
+							<option value="2º">2º</option>
+							<option value="3º">3º</option>
+							<option value="4º">4º</option>
+							<option value="5º">5º</option>
+						</select>
+                    </div>
+                    <div class="form-item">
+                    	<label for="division">División: <strong class="camp-obligatorio">*</strong></label>
+						<select id="division"
+							th:field="*{division}">
+							<option value="1º">1º</option>
+							<option value="2º">2º</option>
+							<option value="3º">3º</option>
+							<option value="4º">4º</option>
+							<option value="5º">5º</option>
+						</select>
+                    </div>
+                    
+                </div>
+                
+                <div class="form-group">
+	                <div class="form-item">
+	                	<label for="ciclo">Ciclo: <strong class="camp-obligatorio">*</strong></label>
+						<select id="ciclo"
+							th:field="*{ciclo}">
+							<option value="Basico">Básico</option>
+							<option value="Superior">Superior</option>
+						</select>
+	                </div>
+	                <div class="form-item">
+	                	 <label for="turn">Turno: <strong class="camp-obligatorio">*</strong></label>
+						<select id="turn"
+							th:field="*{turn}">
+							<option value="Mañana">Mañana</option>
+							<option value="Tarde">Tarde</option>
+						</select>
+	                </div>
+                </div>
+               
+                <button type="submit" class="form-btn">Guardar</button>
+            </form>
+        </div>
+    </main>
+	<script th:src="@{/js/app.js}"></script>
+</body>
+
+</html>
