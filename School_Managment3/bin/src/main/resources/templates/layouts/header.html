@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <header id="header">
+      
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+        <h1>LOGO</h1>
+        <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Alumno
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="#">Alumnos</a>
+		          <a class="dropdown-item" href="/alumno/nuevo">Alumno Nuevo</a>
+		          
+		        </div>
+		      </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Docentes</a>
+            </li>
+             <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Materias
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="/materia">Materias</a>
+		          <a class="dropdown-item" href="/materia/nuevo">Materia Nueva</a>
+		          
+		        </div>
+		      </li>
+            
+            <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Cursos
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="/curso">Cursos</a>
+		          <a class="dropdown-item" href="/curso/nuevo">Nuevo Curso</a>
+		          
+		        </div>
+		      </li>
+            <li class="nav-item mr-2 ml-2">
+            	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Registrate</button>
+	              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Crear Cuenta</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <form>
+							<div class="form-group">
+							    <label for="exampleInputEmail1">Correo Electronico</label>
+							    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+							    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">Contraseña</label>
+							    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+							  </div>
+						  <div class="form-row align-items-center">
+						    <div class="col-sm-3 mr-4 my-1">
+						    	<div class="ml-2">NickName</div>
+						      <label class="sr-only" for="inlineFormInputName"></label>
+						      <input type="text" class="form-control" id="inlineFormInputName" placeholder="JOSE">
+						    </div>
+						    <div class="col-sm-4 my-3">
+						    <div class="ml-2">UserName</div>
+						      <label class="sr-only" for="inlineFormInputGroupUsername"></label>
+						      <div class="input-group">
+						        <div class="input-group-prepend">
+						          <div class="input-group-text ">@</div>
+						        </div>
+						        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="jose94">
+						      </div>
+						    </div>
+						  </div>
+						  
+							<div class="modal-footer">
+				        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						  		<button type="submit" class="btn btn-primary">REGISTRARSE</button>
+				      		</div>
+						</form>	
+				      </div>
+	
+				    </div>
+				  </div>
+				</div>
+            </li>
+            <li class="nav-item">
+             
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@getbootstrap">Iniciar Sesion</button>
+	              <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesion</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <form>
+	
+							<div class="form-group">
+						    <div >Ingrese su Usuario</div>
+						      <label class="sr-only" for="inlineFormInputGroupUsername"></label>
+						      <div class="input-group">
+						        <div class="input-group-prepend">
+						          <div class="input-group-text ">@</div>
+						        </div>
+						        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="jose94">
+						      </div>
+						    </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">Ingrese su contraseña</label>
+							    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+							  </div>
+						  
+							<div class="modal-footer">
+				        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						  		<button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+				      		</div>
+						</form>	
+				      </div>
+	
+				    </div>
+				  </div>
+				</div>
+            </li>
+           
+           
+            
+          </ul>
+        </div>
+      </div>
+      </nav>
+      
+    </header>
+
+    
+  </body>
+</html>

@@ -1,0 +1,58 @@
+#header li .navl-ink{
+	color: white;
+}
+
+#header nav{
+    background-color: #2a2a72;
+background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+	
+}
+#header img{
+
+    width: 80px;
+}
+
+#footer{
+    background-color: #2a2a72;
+background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+}
+
+#footer a{
+    color: white;
+}
+#footer p{
+    color: white;
+}
+
+#carusel .carousel-inner img{
+    max-height: 70vh;
+    object-fit: cover;
+    filter: grayscale(50%);
+
+
+}
+#carousel {
+    position: relative;
+  }
+  
+  #carousel .overlay {
+    z-index: 1;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+  
+  #carousel .overlay .container,
+  #carousel .overlay .row {
+    height: 100%;
+  }
+  #publicidad {
+      background-color: #1c3643;
+      color: white;
+  }
+

@@ -23,7 +23,6 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	private String turn;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
 	private List<Note> note;
@@ -35,11 +34,10 @@ public class Subject {
 		super();
 	}
 
-	public Subject(long id, String name, String turn,  List<Note> note,List<SubjectCourse> subjectCourse) {
+	public Subject(long id, String name,  List<Note> note,List<SubjectCourse> subjectCourse) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.turn = turn;
 		this.note = note;
 		this.subjectCourse = subjectCourse;
 	}
@@ -60,13 +58,6 @@ public class Subject {
 		this.name = name;
 	}
 
-	public String getTurn() {
-		return turn;
-	}
-
-	public void setTurn(String turn) {
-		this.turn = turn;
-	}
 
 	
 

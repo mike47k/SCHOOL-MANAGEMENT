@@ -13,7 +13,7 @@
 	
 	 <main class="main">
         <div class="u-wrapper">
-            <h3 class="form-title" th:text="'Materia: '+${notes[0].subject.name}+' Curso: '+${notes[0].subject.subjectCourse[0].course.name}+' Turno: '+${notes[0].subject.turn}"></h3>
+            <h3 class="form-title" th:text="'Materia: '+${notes[0].subject.name}+' Curso: '+${notes[0].subject.subjectCourse[0].course.name}+' Turno: '+${notes[0].subject.subjectCourse[0].course.turn}"></h3>
             <form method="POST" th:action="@{/materia/notas/guardar/}+ ${notes[0].subject.id}"
                 th:object="${notesF}" class="form">
                 <div class="content-table">
