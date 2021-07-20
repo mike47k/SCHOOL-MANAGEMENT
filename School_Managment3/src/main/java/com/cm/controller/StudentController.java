@@ -147,6 +147,7 @@ public class StudentController {
 			note.setSubject(sub.getSubject() );
 			note.setStudent(form.getStudent());
 			note.setStatus("Cursando");
+			note.setPeriod(form.getYear());
 			notes.add(note);
 			
 			
@@ -214,6 +215,7 @@ public class StudentController {
 			Note note = new Note();
 			note.setSubject(sub.getSubject());
 			note.setStudent(cP.getStudent());
+			note.setPeriod(cP.getPeriod());
 			notes.add(note);
 			
 			

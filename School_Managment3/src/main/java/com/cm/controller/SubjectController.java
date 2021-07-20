@@ -89,6 +89,7 @@ public class SubjectController {
 						note.setStatus("Cursando");
 						note.setSubject(newSubject);
 						note.setStudent(couP.getStudent());
+						note.setPeriod(couP.getPeriod());
 						notes.add(note);
 					}
 				}

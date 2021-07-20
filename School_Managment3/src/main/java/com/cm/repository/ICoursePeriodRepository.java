@@ -9,4 +9,5 @@ import com.cm.model.CoursePeriod;
 public interface ICoursePeriodRepository extends CrudRepository<CoursePeriod, Long>{
 
 	List<CoursePeriod> findByCourseIdAndPeriod(Long id,int year);
+	
 }

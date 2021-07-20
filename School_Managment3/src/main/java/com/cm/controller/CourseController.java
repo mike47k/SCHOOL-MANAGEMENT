@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cm.model.Course;
+import com.cm.service.ICoursePeriodService;
 import com.cm.service.ICourseService;
 import com.cm.service.INoteService;
 
@@ -23,6 +24,9 @@ public class CourseController {
 	
 	@Autowired
 	private INoteService noteService;
+	
+	@Autowired
+	private ICoursePeriodService coursePeriodService;
 	
 	@GetMapping("/curso/nuevo")
 	public ModelAndView getFormCourse() {
@@ -46,11 +50,12 @@ public class CourseController {
 		
 		return modelV;
 	}
-	@GetMapping("/curso/detalles/{id}")
-	public ModelAndView getDetailsCourse (@PathVariable(value = "id")Long id) {
+	@GetMapping("/curso/detalles/{id}/{year}")
+	public ModelAndView getDetailsCourse (@PathVariable(value = "id")Long id,@PathVariable(value = "year")int year) {
 		ModelAndView modelV=new ModelAndView("details-course");
-		modelV.addObject("courseD", courseService.findCourseById(id));
-		modelV.addObject("notes", noteService.getByCourse(id));
+		modelV.addObject("coursePeriods", coursePeriodService.getCoursePeriodByIdAndYear(id, year));
+		//modelV.addObject("courseD", courseService.findCourseById(id));
+		//modelV.addObject("notes", noteService.getByCourse(coursePeriodService.getById(id).getCourse().getId()));
 		
 		return modelV;
 	}

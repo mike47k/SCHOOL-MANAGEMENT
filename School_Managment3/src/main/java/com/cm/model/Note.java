@@ -30,6 +30,7 @@ public class Note {
 	private int average;
 	private int fNote;
 	private String status;
+	private int period;
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "note")
@@ -48,7 +49,7 @@ public class Note {
 	}
 
 	public Note(Long id, int note1, int note2, int note3, int average, Subject subject,
-			Student student,int fNote,List<Exam> exam,String status) {
+			Student student,int fNote,List<Exam> exam,String status,int period) {
 		super();
 		this.id = id;
 		this.note1 = note1;
@@ -60,6 +61,7 @@ public class Note {
 		this.fNote = fNote;
 		this.exam = exam;
 		this.status = status;
+		this.period = period;
 		
 	}
 
@@ -152,6 +154,15 @@ public class Note {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+
+	public int getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(int period) {
+		this.period = period;
 	}
 
 	@Override

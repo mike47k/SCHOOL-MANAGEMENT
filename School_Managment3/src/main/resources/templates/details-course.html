@@ -14,31 +14,39 @@
 	<main class="main">
 		<div class="u-wrapper">
 			<h3 class="form-title">Detalles de cursos</h3>
+			
+			<!--Periodos-->
+			
+			<ul class="ul-periodos">
+				<li class="periodos" th:each="per, statPer : ${coursePeriods}">
+					<a class="periodos-link" th:text="'Periodo: '+${per.period}+' Curso:'+${per.course.name}"
+					th:href="@{/curso/detalles/}+${per.course.id}+'/'+${per.period}"></a>
+				</li>
+			</ul>	
+			
 
 			<div class="content-table">
-				<div th:each="period : ${courseD.coursePeriod}">
 					<div class="text-center">
-						<h1 th:text="'Periodo: '+${period.period}+' Curso:'+${period.course.name}"></h1>
+						<h1 th:text="'Periodo: '+${coursePeriods[0].period}+' Curso:'+${coursePeriods[0].course.name}"></h1>
 					</div>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>Estudiantes</th>
-								<th th:each="sub : ${courseD.subjectCourse}">
+								<th th:each="sub : ${coursePeriods[0].course.subjectCourse}">
 									<a th:text="${sub.subject.name}" class="btn btn-primary"
 										th:href="@{/materia/detalles/}+ ${sub.id}" role="button"></a>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="stud : ${period.student}">
-								<td><a th:text="${stud.name}" class="btn btn-primary" th:href="@{/alumno/rac/}+ ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button"></a></td>
-						<td th:each="note : ${stud.note}" th:text="${note.average}"></td>
+							<tr th:each="stud : ${coursePeriods}">
+								<td><a th:text="${stud.student.name}" class="btn btn-primary" th:href="@{/alumno/rac/}+ ${stud.student.coursePeriod[__${#lists.size(stud.student.coursePeriod) - 1}__].id}" role="button"></a></td>
+						<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}" th:text="${note.average}"></td>
 						
 					</tr>
 				</tbody>
 			</table>
-			</div>
             </div>
         </div>
     </main>
