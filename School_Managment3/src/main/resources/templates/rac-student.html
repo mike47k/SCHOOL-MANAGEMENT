@@ -162,7 +162,7 @@
 						<tbody>
 							<tr th:each="note, stat : ${coursePeriod.course.subjectCourse}">
 								<td>
-									<a th:text="${note.subject.name}" class="btn btn-primary"
+									<a th:text="${note.subject.name}" class="btn-action btn-action--blue"
 									 th:href="@{/materia/detalles/}+ ${note.subject.id}" role="button"></a>
 								</td>
 								<td>

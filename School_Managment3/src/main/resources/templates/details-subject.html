@@ -33,7 +33,7 @@
 						<td >
 						<a 
 						th:text="${note.student.name}"
-						class="btn btn-primary" 
+						class="btn-action btn-action--blue" 
 						th:href="@{/alumno/rac/}+ ${note.student.coursePeriod[__${#lists.size(note.student.coursePeriod) - 1}__].id}" role="button"></a>
 						</td>
 						<td th:text="${note.status}"></td>

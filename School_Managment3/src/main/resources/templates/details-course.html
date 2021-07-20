@@ -25,14 +25,14 @@
 							<tr>
 								<th>Estudiantes</th>
 								<th th:each="sub : ${courseD.subjectCourse}">
-									<a th:text="${sub.subject.name}" class="btn btn-primary"
+									<a th:text="${sub.subject.name}" class="btn-action btn-action--blue"
 										th:href="@{/materia/detalles/}+ ${sub.id}" role="button"></a>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="stud : ${period.student}">
-								<td><a th:text="${stud.name}" class="btn btn-primary" th:href="@{/alumno/rac/}+ ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button"></a></td>
+								<td><a th:text="${stud.name}" class="btn-action btn-action--blue" th:href="@{/alumno/rac/}+ ${stud.coursePeriod[__${#lists.size(stud.coursePeriod) - 1}__].id}" role="button"></a></td>
 						<td th:each="note : ${stud.note}" th:text="${note.average}"></td>
 						
 					</tr>
