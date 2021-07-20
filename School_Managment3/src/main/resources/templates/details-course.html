@@ -41,7 +41,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="stud : ${coursePeriods}">
-								<td><a th:text="${stud.student.name}" class="btn btn-primary" th:href="@{/alumno/rac/}+ ${stud.student.coursePeriod[__${#lists.size(stud.student.coursePeriod) - 1}__].id}" role="button"></a></td>
+								<td><a th:text="${stud.student.name}" class="btn-action btn-action--blue" th:href="@{/alumno/rac/}+ ${stud.student.coursePeriod[__${#lists.size(stud.student.coursePeriod) - 1}__].id}" role="button"></a></td>
 						<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}" th:text="${note.average}"></td>
 						
 					</tr>

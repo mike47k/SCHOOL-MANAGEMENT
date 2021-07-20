@@ -69,6 +69,12 @@ a {
 .btn-action--green {
     background-color: #28a745;
 }
+.btn-action--green:hover {
+    opacity: .8;
+}
+.btn-action--blue {
+    background-color: #0d6efd;
+}
 .btn i {
     margin-right: .25rem;
 }
@@ -326,7 +332,11 @@ input, select, textarea {
 
 @media screen and (min-width: 768px) {
     .card-container {
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .card {
+        width: 24vw;
     }
     .modal-content {
         width: 60%;
@@ -409,5 +419,8 @@ input, select, textarea {
     .modal-content {
         width: 50vw;
         height: 50vh;
+    }
+    .card {
+        width: 17vw;
     }
 }
