@@ -20,11 +20,11 @@
 							alt="Computadora, café, celular y apuntes" title="Curso">
 	            	<div class="card-body">
 	            		<div class="card-text">
-		            		<p class="card-p" th:text="'Curso: ' + ${cos.name}"></p>
+		            		<p class="card-p" th:text="'Curso: ' + ${cos.name}+' ' + ${cos.division}"></p>
 		            		<p class="card-p" th:text="'Turno: ' + ${cos.turn}"></p>
 	            		</div>
-						<a th:if= "${cos.coursePeriod == null}" class="card-btn" th:href="@{/curso/detalles/}+ ${cos.id}+'/'+ ${cos.coursePeriod[__${#lists.size(cos.coursePeriod) - 1}__].period}" role="button">Ver detalles</a>
-	            		<p class="card-p" th:unless= "${cos.coursePeriod == null}">No tiene Estudiantes</p>
+						<a th:if= "${not #lists.isEmpty(cos.coursePeriod)}" class="card-btn" th:href="@{/curso/detalles/}+ ${cos.id}+'/'+ ${cos.coursePeriod[__${#lists.size(cos.coursePeriod) - 1}__].period}" role="button">Ver detalles</a>
+	            		<p th:unless= "${not #lists.isEmpty(cos.coursePeriod)}" class="card-p">No hay estudiantes</p>
 	            	</div>
 	            </div>         
             </div>
