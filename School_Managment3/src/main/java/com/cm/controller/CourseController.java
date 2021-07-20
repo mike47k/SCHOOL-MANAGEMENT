@@ -1,5 +1,10 @@
 package com.cm.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cm.model.Course;
+import com.cm.model.CoursePeriod;
 import com.cm.service.ICoursePeriodService;
 import com.cm.service.ICourseService;
 import com.cm.service.INoteService;
@@ -53,7 +59,23 @@ public class CourseController {
 	@GetMapping("/curso/detalles/{id}/{year}")
 	public ModelAndView getDetailsCourse (@PathVariable(value = "id")Long id,@PathVariable(value = "year")int year) {
 		ModelAndView modelV=new ModelAndView("details-course");
+		List<CoursePeriod> difCouPer=new ArrayList<>();
+		difCouPer.add(coursePeriodService.getCoursePeriodByIdAndYear(id, year).get(0));
+		for (CoursePeriod cP : coursePeriodService.getCoursePeriodDistincPeriodsByCourseId(id)) {
+			boolean aux = true;
+			for (CoursePeriod dif : difCouPer) {
+				if (cP.getPeriod()==dif.getPeriod()) {
+					aux = false;
+				}
+			}
+			if (aux) {
+				difCouPer.add(cP);
+			}
+			
+		}
+		
 		modelV.addObject("coursePeriods", coursePeriodService.getCoursePeriodByIdAndYear(id, year));
+		modelV.addObject("differentsPeriods", difCouPer);
 		//modelV.addObject("courseD", courseService.findCourseById(id));
 		//modelV.addObject("notes", noteService.getByCourse(coursePeriodService.getById(id).getCourse().getId()));
 		

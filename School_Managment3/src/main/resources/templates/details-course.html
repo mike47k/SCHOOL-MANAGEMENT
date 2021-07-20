@@ -18,7 +18,7 @@
 			<!--Periodos-->
 			
 			<ul class="ul-periodos">
-				<li class="periodos" th:each="per, statPer : ${coursePeriods}">
+				<li class="periodos" th:each="per, statPer : ${differentsPeriods}">
 					<a class="periodos-link" th:text="'Periodo: '+${per.period}+' Curso:'+${per.course.name}"
 					th:href="@{/curso/detalles/}+${per.course.id}+'/'+${per.period}"></a>
 				</li>

@@ -29,5 +29,10 @@ public class CoursePeriodImp implements ICoursePeriodService{
 		// TODO Auto-generated method stub
 		return coursePeriodRepository.findById(id).get();
 	}
+	@Override
+	public List<CoursePeriod> getCoursePeriodDistincPeriodsByCourseId(Long id) {
+		// TODO Auto-generated method stub
+		return coursePeriodRepository.findByCourseId(id);
+	}
 
 }
