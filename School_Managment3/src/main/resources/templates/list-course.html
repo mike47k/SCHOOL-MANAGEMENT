@@ -23,7 +23,8 @@
 		            		<p class="card-p" th:text="'Curso: ' + ${cos.name}"></p>
 		            		<p class="card-p" th:text="'Turno: ' + ${cos.turn}"></p>
 	            		</div>
-						<a class="card-btn" th:href="@{/curso/detalles/}+ ${cos.id}+'/'+ ${cos.coursePeriod[__${#lists.size(cos.coursePeriod) - 1}__].period}" role="button">Ver detalles</a>
+						<a th:if= "${cos.coursePeriod == null}" class="card-btn" th:href="@{/curso/detalles/}+ ${cos.id}+'/'+ ${cos.coursePeriod[__${#lists.size(cos.coursePeriod) - 1}__].period}" role="button">Ver detalles</a>
+	            		<p class="card-p" th:unless= "${cos.coursePeriod == null}">No tiene Estudiantes</p>
 	            	</div>
 	            </div>         
             </div>
