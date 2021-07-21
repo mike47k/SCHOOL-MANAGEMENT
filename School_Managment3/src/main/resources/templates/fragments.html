@@ -49,34 +49,35 @@
      
          <aside class="sidebar" th:fragment="aside">
              <ul>
-                 <li class="sidebar-line">
-                     <a class="sidebar-link-title" href="#">Estudiantes</a>
+                 <li class="sidebar-line">                     
+                     <span class="sidebar-link-title"><i class="fas fa-user-friends"></i> Alumnos</span>
                      <ul>
                          <li><a class="sidebar-link" href="/alumno/nuevo">Cargar nuevo estudiante</a></li>
                          <li><a class="sidebar-link" href="/alumno">Mostrar lista de estudiantes</a></li>
                      </ul>
                  </li>
-                 <li class="sidebar-line">
-                     <a class="sidebar-link-title" href="#">Cursos</a>
+                 <li class="sidebar-line">                     
+                     <span class="sidebar-link-title"><i class="fas fa-chalkboard-teacher"></i> Cursos</span>
+
                      <ul>
                          <li><a class="sidebar-link" href="/curso/nuevo">Cargar nuevo curso</a></li>
                          <li><a class="sidebar-link" href="/curso">Mostrar lista de cursos</a></li>
                      </ul>
                  </li>
                  <li class="sidebar-line">
-                     <a class="sidebar-link-title" href="#">Materias</a>
+                    <span class="sidebar-link-title"><i class="fas fa-book"></i> Materias</span>                     
                      <ul>
                          <li><a class="sidebar-link" href="/materia/nuevo">Cargar materia nueva</a></li>
                          <li><a class="sidebar-link" href="/materia">Mostrar lista de materias</a></li>
                      </ul>
                  </li>
-                 <li class="sidebar-line">
+                 <!-- <li class="sidebar-line">
                      <a class="sidebar-link-title" href="#">Examenes</a>
                      <ul>
                          <li><a class="sidebar-link" href="#">Cargar nuevo examen</a></li>
                          <li><a class="sidebar-link" href="#">Mostrar lista de examenes</a></li>
                      </ul>
-                 </li>
+                 </li> -->
      
              </ul>
          </aside>

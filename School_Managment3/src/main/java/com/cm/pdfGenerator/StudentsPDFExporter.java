@@ -62,7 +62,12 @@ public class StudentsPDFExporter {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
-        document.add(new Paragraph("Lista de alumnos"));
+
+        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        font.setColor(Color.BLACK);
+        Paragraph title = new Paragraph("Lista de alumnos");
+        title.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(title);
 
         PdfPTable table = new PdfPTable(5);
 

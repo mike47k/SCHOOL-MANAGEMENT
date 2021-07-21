@@ -32,25 +32,34 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>Estudiantes</th>
-								<th th:each="sub : ${coursePeriods[0].course.subjectCourse}">
-									<a th:text="${sub.subject.name}" class="btn btn-primary"
+								<th rowspan="2">Estudiantes</th>
+								<th colspan="3" th:each="sub : ${coursePeriods[0].course.subjectCourse}">
+									<a class="btn-action btn-action--blue" th:text="${sub.subject.name}"
 										th:href="@{/materia/detalles/}+ ${sub.id}" role="button"></a>
 								</th>
-								<th>Promedio Total</th>
+								<th rowspan="2">Promedio Total</th>
+							</tr>
+							<tr>
+								<th>Promedio</th>
+								<th>Estado</th>
+								<th>Nota final</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="stud : ${coursePeriods}">
-								<td><a th:text="${stud.student.name}" class="btn-action btn-action--blue" th:href="@{/alumno/rac/}+ ${stud.student.coursePeriod[__${#lists.size(stud.student.coursePeriod) - 1}__].id}" role="button"></a></td>
-						<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}">
-						<p th:text="'Promedio: '+${note.average}"></p>
-						<p th:text="'Estado: '+${note.status}"></p>
-						<p th:text="'Nota Final: '+${note.fNote}"></p>
-						</td>
-						<td th:text="${stud.promPeriod}"></td>
-					</tr>
-				</tbody>
+							<td><a th:text="${stud.student.name}" class="btn-action btn-action--blue" th:href="@{/alumno/rac/}+ ${stud.student.coursePeriod[__${#lists.size(stud.student.coursePeriod) - 1}__].id}" role="button"></a></td>
+							<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}">
+							<p th:text="${note.average}"></p>							
+							</td>
+							<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}">								
+								<p th:text="${note.status}"></p>								
+							</td>
+							<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}">																
+								<p th:text="${note.fNote}"></p>
+							</td>
+							<td th:text="${stud.promPeriod}"></td>
+							</tr>
+					</tbody>
 			</table>
             </div>
         </div>

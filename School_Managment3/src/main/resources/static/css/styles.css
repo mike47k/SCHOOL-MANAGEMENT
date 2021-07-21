@@ -186,6 +186,7 @@ input, select, textarea {
 }
 .content-table {
     overflow-x: auto;
+    padding-top: 2rem;
 }
 .content-table .form-title {
     position: sticky;
