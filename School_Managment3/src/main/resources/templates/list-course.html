@@ -21,7 +21,9 @@
 	            	<div class="card-body">
 	            		<div class="card-text">
 		            		<p class="card-p" th:text="'Curso: ' + ${cos.name}+' ' + ${cos.division}"></p>
+		            		<p class="card-p" th:text="'Ciclo: ' + ${cos.ciclo}"></p>
 		            		<p class="card-p" th:text="'Turno: ' + ${cos.turn}"></p>
+		            		
 	            		</div>
 						<a th:if= "${not #lists.isEmpty(cos.coursePeriod)}" class="card-btn" th:href="@{/curso/detalles/}+ ${cos.id}+'/'+ ${cos.coursePeriod[__${#lists.size(cos.coursePeriod) - 1}__].period}" role="button">Ver detalles</a>
 	            		<p th:unless= "${not #lists.isEmpty(cos.coursePeriod)}" class="card-p">No hay estudiantes</p>

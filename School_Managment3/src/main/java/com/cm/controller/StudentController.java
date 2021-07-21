@@ -162,7 +162,9 @@ public class StudentController {
 	@PostMapping("/alumno/notas/guardar/{id}")
 	public ModelAndView saveNotes(@PathVariable(value = "id")Long id,@ModelAttribute("notesF") NotesForm notesF) {
 		System.out.println("sssssssssssssssssssssssssssssss");
+		int year = noteService.getByID(notesF.getNotes().get(0).getId()).getPeriod();
 		for (Note note1 : notesF.getNotes()) {
+			note1.setPeriod(year);
 			int prom=0;
 			float cont=0;
 			if (note1.getNote1()!=0) {

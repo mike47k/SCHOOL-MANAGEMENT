@@ -19,7 +19,7 @@
 			
 			<ul class="ul-periodos">
 				<li class="periodos" th:each="per, statPer : ${differentsPeriods}">
-					<a class="periodos-link" th:text="'Periodo: '+${per.period}+' Curso:'+${per.course.name}"
+					<a class="periodos-link" th:text="'Periodo: '+${per.period}+' Curso:'+${per.course.name}+' '+${per.course.division}+' '+${per.course.ciclo}"
 					th:href="@{/curso/detalles/}+${per.course.id}+'/'+${per.period}"></a>
 				</li>
 			</ul>	
@@ -27,7 +27,7 @@
 
 			<div class="content-table">
 					<div class="text-center">
-						<h1 th:text="'Periodo: '+${coursePeriods[0].period}+' Curso:'+${coursePeriods[0].course.name}"></h1>
+						<h1 th:text="'Periodo: '+${coursePeriods[0].period}+' Curso:'+${coursePeriods[0].course.name}+' '+${coursePeriods[0].course.division}+' '+${coursePeriods[0].course.ciclo}"></h1>
 					</div>
 					<table class="table">
 						<thead>
@@ -37,13 +37,18 @@
 									<a th:text="${sub.subject.name}" class="btn btn-primary"
 										th:href="@{/materia/detalles/}+ ${sub.id}" role="button"></a>
 								</th>
+								<th>Promedio Total</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="stud : ${coursePeriods}">
 								<td><a th:text="${stud.student.name}" class="btn-action btn-action--blue" th:href="@{/alumno/rac/}+ ${stud.student.coursePeriod[__${#lists.size(stud.student.coursePeriod) - 1}__].id}" role="button"></a></td>
-						<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}" th:text="${note.average}"></td>
-						
+						<td th:each="note : ${stud.student.note}" th:if="${note.period} == ${coursePeriods[0].period}">
+						<p th:text="'Promedio: '+${note.average}"></p>
+						<p th:text="'Estado: '+${note.status}"></p>
+						<p th:text="'Nota Final: '+${note.fNote}"></p>
+						</td>
+						<td th:text="${stud.promPeriod}"></td>
 					</tr>
 				</tbody>
 			</table>
