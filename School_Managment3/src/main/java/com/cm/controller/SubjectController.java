@@ -108,7 +108,6 @@ public class SubjectController {
 	public ModelAndView showSubjects() {
 		ModelAndView modelV=new ModelAndView("list-subject");
 		modelV.addObject("subjects",subjectService.showSubjects());
-		modelV.addObject("courses", courseService.showCourses());
 		modelV.addObject("form",new Form());
 		
 		return modelV;
@@ -117,13 +116,11 @@ public class SubjectController {
 	public ModelAndView showSubjectsFind(@ModelAttribute("form") Form form) {
 		ModelAndView modelV=new ModelAndView("list-subject");
 		
-		if (!form.getName().isEmpty()) {
-			modelV.addObject("subjects",subjectService.getSubjectsByName(form.getName()));
-			modelV.addObject("courses", courseService.showCourses());
+		if (!form.getName().isEmpty()||!form.getCourse().getName().isEmpty()||!form.getCourse().getCiclo().isEmpty()) {
+			modelV.addObject("subjects",subjectService.getSubjectsByFinder(form));
 			modelV.addObject("form",new Form());
 		} else {
 			modelV.addObject("subjects",subjectService.showSubjects());
-			modelV.addObject("courses", courseService.showCourses());
 			modelV.addObject("form",new Form());
 		}
 		

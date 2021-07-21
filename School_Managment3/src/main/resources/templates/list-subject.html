@@ -62,7 +62,9 @@
 							alt="Materia disponible" title="Materia" > 
 	            	<div class="card-body">
 	            		<div class="card-text">
-		            		<p class="card-p" th:text="'Curso: ' + ${sub.name}"></p>
+		            		<p class="card-p" th:text="'Materia: ' + ${sub.name}"></p>
+		            		<p class="card-p" th:text="'Curso: ' + ${sub.subjectCourse[0].course.name}"></p>
+		            		<p class="card-p" th:text="'Ciclo: ' + ${sub.subjectCourse[0].course.ciclo}"></p>
 	            		</div>
 						<a class="card-btn" th:href="@{/materia/detalles/}+ ${sub.id}" role="button">Ver detalles</a>
 	            	</div>

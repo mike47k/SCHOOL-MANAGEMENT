@@ -2,6 +2,7 @@ package com.cm.service;
 
 import java.util.List;
 
+import com.cm.model.Form;
 import com.cm.model.Subject;
 
 public interface ISubjectService {
@@ -13,6 +14,8 @@ public interface ISubjectService {
 	public Subject getSubjectById(Long id);
 	
 	public List<Subject> getSubjectsByName(String name);
+	
+	public List<Subject> getSubjectsByFinder(Form form);
 	
 	
 

@@ -1,6 +1,7 @@
 package com.cm.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -75,6 +76,24 @@ public class Subject {
 
 	public void setSubjectCourse(List<SubjectCourse> subjectCourse) {
 		this.subjectCourse = subjectCourse;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, note, subjectCourse);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Subject other = (Subject) obj;
+		return id == other.id && Objects.equals(name, other.name) && Objects.equals(note, other.note)
+				&& Objects.equals(subjectCourse, other.subjectCourse);
 	}
 
 	
