@@ -94,7 +94,7 @@ public class StudentController {
 
 		String currentDateTime = dateFormatter.format(new Date());
 		String headerKey = "Content-Disposition";
-		String headerValue = "attachment; filename=users_" + currentDateTime +".pdf";
+		String headerValue = "attachment; filename=alumnos_" + currentDateTime +".pdf";
 		response.setHeader(headerKey, headerValue);
 		List<Student> listStudents = studentService.getStudents();
 
