@@ -108,6 +108,24 @@ public class SubjectController {
 	public ModelAndView showSubjects() {
 		ModelAndView modelV=new ModelAndView("list-subject");
 		modelV.addObject("subjects",subjectService.showSubjects());
+		modelV.addObject("courses", courseService.showCourses());
+		modelV.addObject("form",new Form());
+		
+		return modelV;
+	}
+	@PostMapping("/materia/busqueda")
+	public ModelAndView showSubjectsFind(@ModelAttribute("form") Form form) {
+		ModelAndView modelV=new ModelAndView("list-subject");
+		
+		if (!form.getName().isEmpty()) {
+			modelV.addObject("subjects",subjectService.getSubjectsByName(form.getName()));
+			modelV.addObject("courses", courseService.showCourses());
+			modelV.addObject("form",new Form());
+		} else {
+			modelV.addObject("subjects",subjectService.showSubjects());
+			modelV.addObject("courses", courseService.showCourses());
+			modelV.addObject("form",new Form());
+		}
 		
 		return modelV;
 	}

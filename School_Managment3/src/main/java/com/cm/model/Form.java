@@ -11,6 +11,7 @@ public class Form {
 	private Student student;
 	private CoursePeriod coursePeriod;
 	private int year;
+	private String name;
 	private List<Note> notes;
 	private Course course;
 	private Long aux;
@@ -28,7 +29,7 @@ public class Form {
 
 	public Form(Subject subject, Student student, CoursePeriod coursePeriod, int year,
 			List<Note> notes,Course course,Long aux,SubjectCourse subjectCourse,List<Course> courseList,
-			Exam exam) {
+			Exam exam,String name) {
 		super();
 		this.subject = subject;
 		this.student = student;
@@ -40,6 +41,19 @@ public class Form {
 		this.subjectCourse = subjectCourse;
 		this.courseList = courseList;
 		this.exam = exam;
+		this.name = name;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

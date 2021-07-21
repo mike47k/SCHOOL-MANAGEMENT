@@ -14,6 +14,48 @@
 	 <main class="main">
         <div class="u-wrapper">            
             <h3 class="form-title">Materias disponibles</h3>
+            <!--Busqueda-->
+        	<div>	
+        	 <form th:action="@{/materia/busqueda}" method="POST"
+					th:object="${form}" class="form">
+                <h3 class="form-title">Busqueda de Materias</h3>
+                <div class="form-group">
+                    <div class="form-item">
+                        <label for="nombres">Nombre: </label>
+                        <input placeholder="Ej: Lengua" type="text" id="nombres" th:field="*{name}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-item">
+                    	<label for="curso">Curso: </label>
+						<select id="curso"
+							th:field="*{course.name}"
+							class="form-control">
+							<option value="">Seleccionar</option>
+							<option value="1º">1º</option>
+							<option value="2º">2º</option>
+							<option value="3º">3º</option>
+							<option value="4º">4º</option>
+							<option value="5º">5º</option>
+						</select>
+                    </div>      
+                    <div class="form-item">
+                    	<label for="ciclo">Ciclo: </label>
+						<select id="ciclo"
+							th:field="*{course.ciclo}"
+							class="form-control">
+							<option value="">Seleccionar</option>
+							<option value="Basico">Basico</option>
+							<option value="Superior">Superior</option>
+						</select>
+                    </div>                   
+                                 
+                    
+                </div>
+                                             
+                <button type="submit" class="form-btn">Buscar</button>
+            </form>
+        	</div>
             <div class="card-container">
 	            <div class="card" th:each="sub : ${subjects}">
 	            <img src="https://images.unsplash.com/photo-1532622785990-d2c36a76f5a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" class="card-img-top" width="100%"

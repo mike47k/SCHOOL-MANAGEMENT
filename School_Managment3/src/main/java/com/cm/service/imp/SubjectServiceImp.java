@@ -28,5 +28,10 @@ public class SubjectServiceImp implements ISubjectService{
 		// TODO Auto-generated method stub
 		return subjectRepository.findById(id).get();
 	}
+	@Override
+	public List<Subject> getSubjectsByName(String name) {
+		// TODO Auto-generated method stub
+		return subjectRepository.findByNameContaining(name);
+	}
 
 }

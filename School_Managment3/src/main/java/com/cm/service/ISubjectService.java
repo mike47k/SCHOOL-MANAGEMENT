@@ -12,6 +12,8 @@ public interface ISubjectService {
 	
 	public Subject getSubjectById(Long id);
 	
+	public List<Subject> getSubjectsByName(String name);
+	
 	
 
 }
