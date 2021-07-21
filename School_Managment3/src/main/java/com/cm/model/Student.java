@@ -248,6 +248,26 @@ public class Student {
 	}
 
 
+	@Override
+	public String toString() {
+		return "{" +
+			" id='" + getId() + "'" +
+			", name='" + getName() + "'" +
+			", surname='" + getSurname() + "'" +
+			", dni='" + getDni() + "'" +
+			", dateOfBirth='" + getDateOfBirth() + "'" +
+			", dateOfInscription='" + getDateOfInscription() + "'" +
+			", lastDateOfReinscription='" + getLastDateOfReinscription() + "'" +
+			", dateOfRecived='" + getDateOfRecived() + "'" +
+			", status='" + getStatus() + "'" +
+			", observacion='" + getObservacion() + "'" +
+			", address='" + getAddress() + "'" +
+			", age='" + getAge() + "'" +
+			", coursePeriod='" + getCoursePeriod() + "'" +
+			", note='" + getNote() + "'" +
+			"}";
+	}
+
 
 	
 	

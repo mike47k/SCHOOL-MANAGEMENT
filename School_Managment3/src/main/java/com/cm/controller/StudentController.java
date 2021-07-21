@@ -1,9 +1,16 @@
 package com.cm.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.DateFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +28,7 @@ import com.cm.model.NotesForm;
 import com.cm.model.Student;
 import com.cm.model.Subject;
 import com.cm.model.SubjectCourse;
+import com.cm.pdfGenerator.StudentsPDFExporter;
 import com.cm.service.ICoursePeriodService;
 import com.cm.service.ICourseService;
 import com.cm.service.IExamService;
@@ -28,6 +36,7 @@ import com.cm.service.INoteService;
 import com.cm.service.IStudentService;
 import com.cm.service.ISubjectCourseService;
 import com.cm.service.imp.NoteServiceImp;
+import com.lowagie.text.DocumentException;
 
 @Controller
 public class StudentController {
@@ -75,6 +84,22 @@ public class StudentController {
 		
 		
 		return modelV;
+	}
+
+	@GetMapping("/alumno/export")
+	public void exportToPdf(HttpServletResponse response) throws DocumentException, IOException{
+		response.setContentType("application/pdf");
+
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+
+		String currentDateTime = dateFormatter.format(new Date());
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=users_" + currentDateTime +".pdf";
+		response.setHeader(headerKey, headerValue);
+		List<Student> listStudents = studentService.getStudents();
+
+		StudentsPDFExporter exporter = new StudentsPDFExporter(listStudents);
+		exporter.export(response);
 	}
 	
 	@PostMapping("/alumnos/busqueda")
