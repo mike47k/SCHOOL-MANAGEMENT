@@ -10,7 +10,7 @@ public interface INoteService {
 	
 	public Note getBySubjectAndStudent(Long idSubject,Long idStudent);
 	public Note getByID(Long id);
-	public List<Note> getBySubjectCourseAndStudent(Long idCourse,Long idStudent);
+	public List<Note> getBySubjectCourseAndStudentAndPeriod(Long idCourse,Long idStudent,int period);
 	public List<Note> getByStudent(Long id);
 	public List<Note> getByCourse(Long id);
 	public List<Note> getByCourseAndSubjectAndPeriod(Long idCou,Long idSub,int period);

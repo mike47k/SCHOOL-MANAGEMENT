@@ -61,7 +61,7 @@ public class CourseController {
 		ModelAndView modelV=new ModelAndView("details-course");
 		List<CoursePeriod> difCouPer=new ArrayList<>();
 		difCouPer.add(coursePeriodService.getCoursePeriodByIdAndYear(id, year).get(0));
-		for (CoursePeriod cP : coursePeriodService.getCoursePeriodDistincPeriodsByCourseId(id)) {
+		for (CoursePeriod cP : coursePeriodService.get2CoursePeriodDistincPeriodsByCourseId(id)) {
 			boolean aux = true;
 			for (CoursePeriod dif : difCouPer) {
 				if (cP.getPeriod()==dif.getPeriod()) {

@@ -26,8 +26,10 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td th:text="${coursePeriod.student.name}"></td>
-					<td th:text="${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.name}"></td>
+					<td th:text="${coursePeriod.student.name}+' '+${coursePeriod.student.surname}"></td>
+					<td th:text="${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.name}+' '+
+					${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.division}+' Ciclo '+
+					${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.ciclo}"></td>
 					<td th:text="${coursePeriod.student.coursePeriod[__${#lists.size(coursePeriod.student.coursePeriod) - 1}__].course.turn}"></td>
 				</tr>
 			</tbody>
@@ -136,7 +138,7 @@
 			
 			<ul class="ul-periodos">
 				<li class="periodos" th:each="per, statPer : ${coursePeriod.student.coursePeriod}">
-					<a class="periodos-link" th:text="'Periodo: '+${per.period}+' Curso:'+${per.course.name}"
+					<a class="periodos-link" th:text="${per.course.name}+' '+${per.course.division}+' Ciclo '+${per.course.ciclo}+' '+${per.period}"
 					th:href="@{/alumno/rac/}+${per.id}"></a>
 				</li>
 			</ul>			

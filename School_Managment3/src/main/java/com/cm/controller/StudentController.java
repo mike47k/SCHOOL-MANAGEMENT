@@ -119,7 +119,7 @@ public class StudentController {
 		Form form =new Form();
 		Form form2 =new Form();
 		form.setCoursePeriod(coursePeriodService.getById(id));
-		form.setNotes(noteService.getBySubjectCourseAndStudent(coursePeriodService.getById(id).getCourse().getId(),coursePeriodService.getById(id).getStudent().getId()));
+		form.setNotes(noteService.getBySubjectCourseAndStudentAndPeriod(coursePeriodService.getById(id).getCourse().getId(),coursePeriodService.getById(id).getStudent().getId(),coursePeriodService.getById(id).getPeriod()));
 		ModelAndView modelV=new ModelAndView("rac-student");
 		modelV.addObject("coursePeriod", coursePeriodService.getById(id));
 		modelV.addObject("form",form);
