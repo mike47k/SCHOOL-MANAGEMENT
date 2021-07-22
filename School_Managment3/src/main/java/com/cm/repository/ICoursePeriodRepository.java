@@ -10,5 +10,6 @@ public interface ICoursePeriodRepository extends CrudRepository<CoursePeriod, Lo
 
 	List<CoursePeriod> findByCourseIdAndPeriod(Long id,int year);
 	List<CoursePeriod> findByCourseId(Long id);
+	List<CoursePeriod> findByCourseIdOrderByPeriodAsc(Long id);
 	
 }

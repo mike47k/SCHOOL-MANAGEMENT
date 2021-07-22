@@ -163,7 +163,7 @@
 							<tr th:each="note, stat : ${coursePeriod.course.subjectCourse}">
 								<td>
 									<a th:text="${note.subject.name}" class="btn-action btn-action--blue"
-									 th:href="@{/materia/detalles/}+ ${note.subject.id}" role="button"></a>
+									 th:href="@{/materia/detalles/}+ ${note.subject.id}+'/'+${note.course.id}+'/'+${note.course.coursePeriod[__${#lists.size(note.course.coursePeriod) - 1}__].period}" role="button"></a>
 								</td>
 								<td>
 									<select th:field="*{notes[__${stat.index}__].note1}">

@@ -134,8 +134,20 @@ public class SubjectController {
 		ModelAndView modelV=new ModelAndView("details-subject");
 		modelV.addObject("notes", noteService.getByCourseAndSubjectAndPeriod(idCou, idSub,period));
 		modelV.addObject("notesF", new NotesForm(notesF));
-	
-		modelV.addObject("periods", coursePeriodService.getCoursePeriodDistincPeriodsByCourseId(idCou));
+		List<CoursePeriod> periods = new ArrayList<>();
+		periods.add(coursePeriodService.get2CoursePeriodDistincPeriodsByCourseId(idCou).get(0));
+		for (CoursePeriod coursePeriod : coursePeriodService.get2CoursePeriodDistincPeriodsByCourseId(idCou)) {
+			boolean aux = true;
+			for (CoursePeriod coursePeriod2 : periods) {
+				if (coursePeriod.getPeriod()==coursePeriod2.getPeriod()) {
+					aux=false;
+				}
+			}
+			if (aux) {
+				periods.add(coursePeriod);
+			}
+		}
+		modelV.addObject("periods", periods);
 		
 		
 		return modelV;
