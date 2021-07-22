@@ -13,7 +13,26 @@
 	
 	 <main class="main">
         <div class="u-wrapper">
-            <h3 class="form-title" th:text="'Materia: '+${notes[0].subject.name}+' Curso: '+${notes[0].subject.subjectCourse[0].course.name}+' Turno: '+${notes[0].subject.subjectCourse[0].course.turn}"></h3>
+            <h3 class="form-title" th:text="'Materia: '+${notes[0].subject.name}+' Curso: '+${notes[0].subject.subjectCourse[0].course.name}"></h3>
+            <h3 class="form-title" th:text="'Turno: '+${notes[0].subject.subjectCourse[0].course.turn}+' Ciclo: '+${notes[0].subject.subjectCourse[0].course.ciclo}"></h3>
+
+            <!--DIVISIONES-->
+			
+			<ul class="ul-periodos">
+				<li class="periodos" th:each="per, statPer : ${notes[0].subject.subjectCourse}">
+					<a class="periodos-link" th:text="'Division: '+${per.course.division}"
+					th:href="@{/materia/detalles/}+${notes[0].subject.id}+'/'+${per.course.id}+'/'+${per.course.coursePeriod[__${#lists.size(per.course.coursePeriod) - 1}__].period}"></a>
+				</li>
+			</ul>
+			<!--periodos-->
+			
+			<ul class="ul-periodos">
+				<li class="periodos" th:each="per, statPer : ${periods}">
+					<a if:th="${per.period} !=  ${periods[__${statPer.index} - 1__].period}" class="periodos-link" th:text="'Periodo: '+${per.period}"
+					th:href="@{/materia/detalles/}+${notes[0].subject.id}+'/'+${per.course.id}+'/'+${per.period}"></a>
+				</li>
+			</ul>		
+            
             <form method="POST" th:action="@{/materia/notas/guardar/}+ ${notes[0].subject.id}"
                 th:object="${notesF}" class="form">
                 <div class="content-table">

@@ -67,4 +67,10 @@ public class NoteServiceImp implements INoteService{
 		return noteRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Note> getByCourseAndSubjectAndPeriod(Long idCou, Long idSub, int period) {
+		// TODO Auto-generated method stub
+		return noteRepository.findByStudentCoursePeriodCourseIdAndSubjectIdAndStudentCoursePeriodPeriod(idCou, idSub,period);
+	}
+
 }

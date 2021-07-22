@@ -126,13 +126,16 @@ public class SubjectController {
 		
 		return modelV;
 	}
-	@GetMapping("/materia/detalles/{id}")
-	public ModelAndView getDetailsSubject (@PathVariable(value = "id")Long id) {
+	@GetMapping("/materia/detalles/{idSub}/{idCou}/{period}")
+	public ModelAndView getDetailsSubject (@PathVariable(value = "idSub")Long idSub,@PathVariable(value = "idCou")Long idCou,
+			@PathVariable(value = "period")int period) {
 		List<Note> notesF = new ArrayList<>();
-		notesF= noteService.getBySubject(id);
+		notesF= noteService.getByCourseAndSubjectAndPeriod(idCou, idSub,period);
 		ModelAndView modelV=new ModelAndView("details-subject");
-		modelV.addObject("notes", noteService.getBySubject(id));
+		modelV.addObject("notes", noteService.getByCourseAndSubjectAndPeriod(idCou, idSub,period));
 		modelV.addObject("notesF", new NotesForm(notesF));
+	
+		modelV.addObject("periods", coursePeriodService.getCoursePeriodDistincPeriodsByCourseId(idCou));
 		
 		
 		return modelV;
