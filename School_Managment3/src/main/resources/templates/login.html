@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">    
+    <link th:href="@{/css/style-login.css}" rel="stylesheet">
+    <title>School Management</title>
+</head>
+<body>
+    <main>
+        <form action="" class="form">
+            <h1 class="form-title">Acceder a SM</h1>
+            <div class="form-group">
+                <label for="nombreUsuario"><i class="fas fa-user"></i> Ingrese usuario:</label>
+                <input type="text" id="nombreUsuario">
+            </div>
+            <div class="form-group">
+                <label for="contraseña"><i class="fas fa-key"></i> Ingrese contraseña:</label>
+                <div class="input-password">
+                    <input class="password" type="password" id="contraseña">
+                    <i id="pwd" class="far fa-eye" title="alternar visibilidad"></i>
+                </div>
+            </div>
+            <button type="submit" class="form-btn btn--cyan">Ingresar</button>
+        </form>
+    </main>
+
+    <script th:src="@{/js/app.js}"></script>
+
+</body>
+</html>

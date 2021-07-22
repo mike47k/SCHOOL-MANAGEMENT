@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cm.model.Student;
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
 import com.lowagie.text.Font;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.PageSize;
@@ -38,24 +39,64 @@ public class StudentsPDFExporter {
         font.setColor(Color.WHITE);
         cellFirst.setRotation(90);        
 
-        cellFirst.setPhrase(new Phrase("N° de orden", font));
-        cellFirst.setRowspan(2);
-        table.addCell(cellFirst);        
+        // cellFirst.setPhrase(new Phrase("N° de orden", font));
+        // cellFirst.setRowspan(2);
+        // table.addCell(cellFirst);
+        cell.setPhrase(new Phrase("N°",font));        
+        cell.setRowspan(2);
+        table.addCell(cell);
         cell.setPhrase(new Phrase("Apellido y nombre", font));
         cell.setRowspan(2);
         table.addCell(cell);
         cell.setPhrase(new Phrase("1° Trimestre", font));
-        // cell.setRowspan(2);
-        cell.setColspan(5);
+        cell.setColspan(5);        
         table.addCell(cell);        
+        
         cell.setPhrase(new Phrase("2° Cuatrimestre", font));
-        // cell.setRowspan(2);
         cell.setColspan(5);
         table.addCell(cell);
+        
         cell.setPhrase(new Phrase("3° Cuatrimestre", font));
-        // cell.setRowspan(2);
         cell.setColspan(5);
         table.addCell(cell);
+
+        cell.setPhrase(new Phrase("EXAMENES", font));
+        cell.setColspan(2);
+        table.addCell(cell);
+        table.addCell(createCell("Calificación \n definita", 1, 2, PdfPCell.BOX,90));
+        
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("Calificación \n definitiva", 1, 1, PdfPCell.BOX,90));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("Calificación \n definitiva", 1, 1, PdfPCell.BOX,90));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+        table.addCell(createCell("Calificación \n definitiva", 1, 1, PdfPCell.BOX,90));
+        table.addCell(createCell("DICIEMBRE", 1, 1, PdfPCell.BOX,90));
+        table.addCell(createCell("FEBRERO", 1, 1, PdfPCell.BOX,90));
+        table.addCell(createCell("", 1, 1, PdfPCell.BOX,0));
+    }
+
+    public PdfPCell createCell(String content, int colspan, int rowspan, int border, int rotation) {
+        Font font = FontFactory.getFont(FontFactory.HELVETICA);
+        font.setSize(8);
+        PdfPCell cell = new PdfPCell(new Phrase(content, font));
+        cell.setColspan(colspan);
+        cell.setRowspan(rowspan);
+        cell.setBorder(border);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setRotation(rotation);
+        return cell;
     }
 
     private void writeTableData(PdfPTable table){
@@ -74,6 +115,9 @@ public class StudentsPDFExporter {
             table.addCell("");
             table.addCell("");
             table.addCell("");
+            table.addCell("");
+            table.addCell("");
+            table.addCell("");            
             table.addCell("");
             table.addCell("");
             table.addCell("");
@@ -101,9 +145,10 @@ public class StudentsPDFExporter {
         document.add(nameSchool);
         document.add(teacherAndSubjet);
 
-        PdfPTable table = new PdfPTable(17);
+        PdfPTable table = new PdfPTable(20);
         
-        float[] medidaCeldas = {2f,6.70f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f}; 
+        
+        float[] medidaCeldas = {2f,6.70f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f,2f}; 
 
         table.setWidths(medidaCeldas);
         table.setWidthPercentage(100);
