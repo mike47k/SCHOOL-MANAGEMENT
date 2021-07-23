@@ -33,7 +33,7 @@
 				</li>
 			</ul>		
             
-            <form method="POST" th:action="@{/materia/notas/guardar/}+ ${notes[0].subject.id}"
+            <form method="POST" th:action="@{/materia/notas/guardar/}+ ${notes[0].subject.id}+'/'+${course}+'/'+${notes[0].period}"
                 th:object="${notesF}" class="form">
                 <div class="content-table">
                 <table class="table" >

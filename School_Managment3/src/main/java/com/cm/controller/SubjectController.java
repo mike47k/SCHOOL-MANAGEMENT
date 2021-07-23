@@ -132,6 +132,7 @@ public class SubjectController {
 		List<Note> notesF = new ArrayList<>();
 		notesF= noteService.getByCourseAndSubjectAndPeriod(idCou, idSub,period);
 		ModelAndView modelV=new ModelAndView("details-subject");
+		modelV.addObject("course", idCou);
 		modelV.addObject("notes", noteService.getByCourseAndSubjectAndPeriod(idCou, idSub,period));
 		modelV.addObject("notesF", new NotesForm(notesF));
 		List<CoursePeriod> periods = new ArrayList<>();
@@ -152,10 +153,11 @@ public class SubjectController {
 		
 		return modelV;
 	}
-	@PostMapping("/materia/notas/guardar/{id}")
-	public ModelAndView saveNotes(@PathVariable(value = "id")Long id,@ModelAttribute("notesF") NotesForm notesF) {
+	@PostMapping("/materia/notas/guardar/{idSub}/{idCou}/{period}")
+	public ModelAndView saveNotes(@PathVariable(value = "idSub")Long idSub,@PathVariable(value = "idCou")Long idCou,
+			@PathVariable(value = "period")int period,@ModelAttribute("notesF") NotesForm notesF) {
 		
-		ModelAndView modelV=new ModelAndView("redirect:/materia/detalles/"+id);
+		ModelAndView modelV=new ModelAndView("redirect:/materia/detalles/"+idSub+"/"+idCou+"/"+period);
 		
 		for (Note note1 : notesF.getNotes()) {
 			int prom=0;
