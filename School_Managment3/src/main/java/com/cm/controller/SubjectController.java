@@ -160,6 +160,7 @@ public class SubjectController {
 		ModelAndView modelV=new ModelAndView("redirect:/materia/detalles/"+idSub+"/"+idCou+"/"+period);
 		
 		for (Note note1 : notesF.getNotes()) {
+			note1.setPeriod(period);
 			int prom=0;
 			float cont=0;
 			if (note1.getNote1()!=0) {
