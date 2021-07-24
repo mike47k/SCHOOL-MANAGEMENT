@@ -5,8 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +46,16 @@ public class CourseController {
 	}
 	
 	@PostMapping("/curso/guardar")
-	public ModelAndView saveCourse(@ModelAttribute("course")Course course) {
-		ModelAndView modelV=new ModelAndView("redirect:/home");
-		courseService.saveCourse(course);
-		return modelV;
+	public ModelAndView saveCourse(@Valid @ModelAttribute("course")Course course, BindingResult resultadoValidacion) {
+
+		if(resultadoValidacion.hasErrors()){
+			ModelAndView modelV=new ModelAndView("form-course");	
+			return modelV;
+		}else {
+			ModelAndView modelV=new ModelAndView("redirect:/home");
+			courseService.saveCourse(course);
+			return modelV;
+		}
 	}
 	
 	@GetMapping("/curso")

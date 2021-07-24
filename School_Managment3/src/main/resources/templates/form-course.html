@@ -29,6 +29,8 @@
 							<option value="4º">4º</option>
 							<option value="5º">5º</option>
 						</select>
+						<!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>					
                     </div>
                     <div class="form-item">
                     	<label for="division">División: <strong class="camp-obligatorio">*</strong></label>
@@ -40,28 +42,35 @@
 							<option value="4º">4º</option>
 							<option value="5º">5º</option>
 						</select>
+						<!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('division')}" th:errors="*{division}"></div>
                     </div>
                     
                 </div>
-                
-                <div class="form-group">
-	                <div class="form-item">
-	                	<label for="ciclo">Ciclo: <strong class="camp-obligatorio">*</strong></label>
+				
+				<div class="form-group">
+					<div class="form-item">
+						<label for="ciclo">Ciclo: <strong class="camp-obligatorio">*</strong></label>
 						<select id="ciclo"
 							th:field="*{ciclo}">
 							<option value="Basico">Básico</option>
 							<option value="Superior">Superior</option>
 						</select>
-	                </div>
-	                <div class="form-item">
-	                	 <label for="turn">Turno: <strong class="camp-obligatorio">*</strong></label>
+						<!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('ciclo')}" th:errors="*{ciclo}"></div>
+					</div>
+					<div class="form-item">
+						 <label for="turn">Turno: <strong class="camp-obligatorio">*</strong></label>
 						<select id="turn"
 							th:field="*{turn}">
 							<option value="Mañana">Mañana</option>
 							<option value="Tarde">Tarde</option>
 						</select>
-	                </div>
-                </div>
+						<!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('turn')}" th:errors="*{turn}"></div>
+					</div>
+				</div>
+                
                
                 <button type="submit" class="form-btn">Guardar</button>
             </form>

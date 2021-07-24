@@ -20,6 +20,8 @@
                     <div class="form-item">
                         <label for="nombre">Nombre de la Materia: <strong class="camp-obligatorio">*</strong></label>
                         <input type="text" id="nombre" th:field="*{subject.name}">
+                        <!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('subject.name')}" th:errors="*{subject.name}"></div>
                     </div>
                     
                 </div>
@@ -28,19 +30,23 @@
                     <div class="form-item">
                     	<label for="curso">Curso: <strong class="camp-obligatorio">*</strong> </label> 
                         <select id="curso" th:field="*{course.name}"> 
-	                        <option value="1º">1º</option>
-							<option value="2º">2º</option>
-							<option value="3º">3º</option>
-							<option value="4º">4º</option>
-							<option value="5º">5º</option>
+	                        <option th:each="cos : ${courses}"
+                            th:value="${cos.id}"
+                            th:text="${cos.name}"
+                            th:selected="false">
+                        </option>							
                         </select>
-                    </div>
+                        <!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('course.name')}" th:errors="*{course.name}"></div>
+                    </div>                  
                     <div class="form-item">
                     	<label for="ciclo">Ciclo: <strong class="camp-obligatorio">*</strong> </label> 
                         <select id="ciclo" th:field="*{course.ciclo}">
 							<option value="Basico">Básico</option>
 							<option value="Superior">Superior</option>
 						</select>
+                        <!-- Muestra mensajes de error de validación -->
+						<div class="text-validation" th:if="${#fields.hasErrors('course.ciclo')}" th:errors="*{course.ciclo}"></div>
                     </div>
                     
                 </div>

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -22,11 +24,18 @@ public class Course {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotBlank(message="Debe seleccionar una opción")
 	private String name;
+
+	@NotBlank(message="Debe seleccionar una opción")
 	private String division;
+
+	@NotBlank(message="Debe seleccionar una opción")
 	private String ciclo;
+
+	@NotBlank(message="Debe seleccionar una opción")
 	private String turn;
-	
+		
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private List<CoursePeriod> coursePeriod;
 	

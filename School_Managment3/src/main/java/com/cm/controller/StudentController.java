@@ -11,9 +11,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.text.DateFormatter;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -225,34 +227,42 @@ public class StudentController {
 
 	
 	@PostMapping("/alumno/guardar")
-	public ModelAndView saveStudent(@ModelAttribute("coursePeriod") CoursePeriod cP) {
-		ModelAndView modelV = new ModelAndView("redirect:/home");
-		student=cP.getStudent();
-		student.setStatus("Cursando");
-		student.setDateOfInscription(LocalDate.now());
-		cP.setStudent(student);
-		cP.setStudent(studentService.saveStudent(cP.getStudent()));
-		
-		
-		List<Note>notes=new ArrayList<>();
-		cP.setCourse(courseService.findCourseById(cP.getCourse().getId()));
-		
-		
-		for (SubjectCourse sub : subjectCourseService.getSubjectCourseByCourseId(cP.getCourse().getId())) {
-			Note note = new Note();
-			note.setSubject(sub.getSubject());
-			note.setStudent(cP.getStudent());
-			note.setPeriod(cP.getPeriod());
-			notes.add(note);
+	public ModelAndView saveStudent(@Valid @ModelAttribute("coursePeriod") CoursePeriod cP, BindingResult resultadoValidacion) {
+		ModelAndView modelV;
+		if(resultadoValidacion.hasErrors()){
+			modelV = new ModelAndView("form-student");	
+			System.out.println("holaaaaaaa");
+			return modelV;
+		}else {
+			modelV = new ModelAndView("redirect:/home");
+			student=cP.getStudent();
+			student.setStatus("Cursando");
+			student.setDateOfInscription(LocalDate.now());
+			cP.setStudent(student);
+			cP.setStudent(studentService.saveStudent(cP.getStudent()));
 			
 			
+			List<Note>notes=new ArrayList<>();
+			cP.setCourse(courseService.findCourseById(cP.getCourse().getId()));
+			
+			
+			for (SubjectCourse sub : subjectCourseService.getSubjectCourseByCourseId(cP.getCourse().getId())) {
+				Note note = new Note();
+				note.setSubject(sub.getSubject());
+				note.setStudent(cP.getStudent());
+				note.setPeriod(cP.getPeriod());
+				notes.add(note);
+				
+				
+			}
+			coursePeriodService.saveCoursePeriod(cP);
+			noteService.saveNotes(notes);
+			
+			
+			
+			return modelV;
 		}
-		coursePeriodService.saveCoursePeriod(cP);
-		noteService.saveNotes(notes);
-		
-		
-		
-		return modelV;
+
 	}
 
 }

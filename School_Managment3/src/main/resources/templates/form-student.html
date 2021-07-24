@@ -14,20 +14,28 @@
                     <div class="form-item">
                         <label for="nombres">Nombre/s: <strong class="camp-obligatorio">*</strong></label>
                         <input type="text" id="nombres" th:field="*{student.name}">
+                         <!-- Muestra mensajes de error de validación -->
+                        <div class="text-validation" th:if="${#fields.hasErrors('student.name')}" th:errors="*{student.name}"></div>                        
                     </div>
                     <div class="form-item">                        
                         <label for="apellidos">Apellido/s: <strong class="camp-obligatorio">*</strong> </label>
                         <input type="text" id="apellidos" th:field="*{student.surname}">
+                        <!-- Muestra mensajes de error de validación -->
+                        <div class="text-validation " th:if="${#fields.hasErrors('student.surname')}" th:errors="*{student.surname}"></div>                        
                     </div>
                 </div>
                  <div class="form-group">
                     <div class="form-item">
                         <label for="dni">DNI: <strong class="camp-obligatorio">*</strong> </label>
                         <input type="number" id="dni" th:field="*{student.dni}">
+                        <!-- Muestra mensajes de error de validación -->
+                        <div class="text-validation " th:if="${#fields.hasErrors('student.dni')}" th:errors="*{student.dni}"></div>                        
                     </div>
                     <div class="form-item">
                         <label for="fechaNacimiento">Fecha de nacimiento: <strong class="camp-obligatorio">*</strong> </label>
                         <input type="date" th:field="*{student.dateOfBirth}">
+                        <!-- Muestra mensajes de error de validación -->
+                        <div class="text-validation " th:if="${#fields.hasErrors('student.dateOfBirth')}" th:errors="*{student.dateOfBirth}"></div>                        
                     </div>                    
                 </div>
                 <div class="form-group">
@@ -38,6 +46,8 @@
 									th:text="${cus.name}+' '+${cus.division}+' Ciclo '+${cus.ciclo}+' '+${cus.turn}" th:selected="false">
 	                        </option>
                         </select>
+                        <!-- Muestra mensajes de error de validación -->
+                        <div class="text-validation " th:if="${#fields.hasErrors('course.id')}" th:errors="*{course.id}"></div>                        
                     </div>
                     <div class="form-item">
                     	<label for="periodo">Periodo: <strong class="camp-obligatorio">*</strong> </label> 
@@ -46,6 +56,8 @@
 									th:each="year : ${#numbers.sequence( #dates.year(#dates.createNow()),2000)}"
 									th:value="${year}" th:text="${year}"></option>
 						</select>
+                        <!-- Muestra mensajes de error de validación -->
+                        <div class="text-validation " th:if="${#fields.hasErrors('period')}" th:errors="*{period}"></div>                        
                     </div>
                     
                 </div>

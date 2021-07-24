@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,45 +67,53 @@ public class SubjectController {
 	}
 	
 	@PostMapping("/materia/guardar")
-	public ModelAndView saveSubject(@ModelAttribute("form") Form form) {
-		ModelAndView modelV=new ModelAndView("redirect:/home");
-		Subject newSubject = subjectService.saveSubject(form.getSubject());
-		
-		
-		form.setCourseList(courseService.findCourseByNameAndCiclo(form.getCourse().getName(), form.getCourse().getCiclo()));
-		
-		List<SubjectCourse> subCoursList= new ArrayList<>();
-		for (Course cours : form.getCourseList()) {
-			SubjectCourse sC = new SubjectCourse();
-			sC.setSubject(newSubject);
-			sC.setCourse(cours);
-			subCoursList.add(sC);
+	public ModelAndView saveSubject(@Valid @ModelAttribute("form") Form form, BindingResult resultadoValidacion) {
+
+		if(resultadoValidacion.hasErrors()){
+			ModelAndView modelV=new ModelAndView("form-subject");	
+			return modelV;
+		}else {
+
+			ModelAndView modelV=new ModelAndView("redirect:/home");
+			Subject newSubject = subjectService.saveSubject(form.getSubject());
 			
-		}
-		subCoursList=subjectCourseService.saveSubjectCourseList(subCoursList);
-		
-		
-		List<Note> notes = new ArrayList<>();
-			if (!subCoursList.get(0).getCourse().getCoursePeriod().isEmpty()) {
-				for (SubjectCourse subC : subCoursList) {
-					for (CoursePeriod couP : subC.getCourse().getCoursePeriod()) {
-						Note note = new Note();
-						note.setStatus("Cursando");
-						note.setSubject(newSubject);
-						note.setStudent(couP.getStudent());
-						note.setPeriod(couP.getPeriod());
-						notes.add(note);
-					}
-				}
-				noteService.saveNotes(notes);
-			}
-	
 			
+			form.setCourseList(courseService.findCourseByNameAndCiclo(form.getCourse().getName(), form.getCourse().getCiclo()));
+			
+			List<SubjectCourse> subCoursList= new ArrayList<>();
+			for (Course cours : form.getCourseList()) {
+				SubjectCourse sC = new SubjectCourse();
+				sC.setSubject(newSubject);
+				sC.setCourse(cours);
+				subCoursList.add(sC);
 				
+			}
+			subCoursList=subjectCourseService.saveSubjectCourseList(subCoursList);
+			
+			
+			List<Note> notes = new ArrayList<>();
+				if (!subCoursList.get(0).getCourse().getCoursePeriod().isEmpty()) {
+					for (SubjectCourse subC : subCoursList) {
+						for (CoursePeriod couP : subC.getCourse().getCoursePeriod()) {
+							Note note = new Note();
+							note.setStatus("Cursando");
+							note.setSubject(newSubject);
+							note.setStudent(couP.getStudent());
+							note.setPeriod(couP.getPeriod());
+							notes.add(note);
+						}
+					}
+					noteService.saveNotes(notes);
+				}
 		
-		
-		
-		return modelV;
+				
+					
+			
+			
+			
+			return modelV;
+		}
+
 	}
 	
 	@GetMapping("/materia")

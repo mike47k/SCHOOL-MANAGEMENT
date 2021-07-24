@@ -13,6 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -27,9 +33,18 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotBlank(message="Debe ingresar un nombre")
 	private String name;
+
+	@NotBlank(message="Debe seleccionar un apellido")
 	private String surname;
+
+	@Min(value = 1000000,message = "El DNI debe ser mayor o igual a 1000000 digitos")
+	@Max(value = 999999999,message = "El DNI debe ser menor o igual a 999999999 digitos")
 	private long dni;
+
+	@NotBlank(message = "Debe ingresar una fecha valida")
+	@Past
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	
@@ -50,9 +65,11 @@ public class Student {
 	
 	private int age;
 	
+	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<CoursePeriod> coursePeriod;
 	
+	@Valid
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Note> note;
 	
