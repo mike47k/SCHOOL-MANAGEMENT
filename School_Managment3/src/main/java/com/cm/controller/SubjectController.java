@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -68,18 +69,19 @@ public class SubjectController {
 	
 	@PostMapping("/materia/guardar")
 	public ModelAndView saveSubject(@Valid @ModelAttribute("form") Form form, BindingResult resultadoValidacion) {
-
+		System.out.println("Nombre :"+form.getCourse().getName());
 		if(resultadoValidacion.hasErrors()){
 			ModelAndView modelV=new ModelAndView("form-subject");	
+			modelV.addObject("form",form);
+			modelV.addObject("courses",courseService.showCourses());
 			return modelV;
 		}else {
-
 			ModelAndView modelV=new ModelAndView("redirect:/home");
 			Subject newSubject = subjectService.saveSubject(form.getSubject());
 			
 			
 			form.setCourseList(courseService.findCourseByNameAndCiclo(form.getCourse().getName(), form.getCourse().getCiclo()));
-			
+			System.out.println(courseService.findCourseByNameAndCiclo(form.getCourse().getName(), form.getCourse().getCiclo()).size());
 			List<SubjectCourse> subCoursList= new ArrayList<>();
 			for (Course cours : form.getCourseList()) {
 				SubjectCourse sC = new SubjectCourse();

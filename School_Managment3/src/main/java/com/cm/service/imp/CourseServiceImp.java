@@ -42,6 +42,12 @@ public class CourseServiceImp implements ICourseService {
 		return courseRepository.findByNameAndCiclo(name,ciclo);
 	}
 
+	@Override
+	public List<Course> findRepeats(String name, String division, String ciclo, String turn) {
+		// TODO Auto-generated method stub
+		return courseRepository.findByNameAndDivisionAndCicloAndTurn(name, division, ciclo, turn);
+	}
+
 	
 	
 

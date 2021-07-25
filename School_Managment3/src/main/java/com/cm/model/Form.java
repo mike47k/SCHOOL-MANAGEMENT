@@ -2,12 +2,16 @@ package com.cm.model;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class Form {
 
+	@Valid
 	private Subject subject;
+	@Valid
 	private Student student;
 	private CoursePeriod coursePeriod;
 	private int year;

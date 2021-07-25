@@ -24,16 +24,12 @@ public class Course {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank(message="Debe seleccionar una opción")
 	private String name;
 
-	@NotBlank(message="Debe seleccionar una opción")
 	private String division;
 
-	@NotBlank(message="Debe seleccionar una opción")
 	private String ciclo;
 
-	@NotBlank(message="Debe seleccionar una opción")
 	private String turn;
 		
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")

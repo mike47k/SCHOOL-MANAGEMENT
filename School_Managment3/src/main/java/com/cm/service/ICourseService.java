@@ -13,4 +13,7 @@ public interface ICourseService {
 	public Course findCourseById(Long id);
 	
 	public List<Course> findCourseByNameAndCiclo(String name,String ciclo);
+	
+	public List<Course> findRepeats(String name,String division,String ciclo,String turn);
+	
 }

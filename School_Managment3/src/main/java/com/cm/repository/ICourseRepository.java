@@ -9,5 +9,6 @@ import com.cm.model.Course;
 public interface ICourseRepository extends CrudRepository<Course, Long> {
 	
 	List<Course> findByNameAndCiclo(String name,String ciclo);
+	List<Course> findByNameAndDivisionAndCicloAndTurn(String name,String division,String ciclo,String turn);
 
 }

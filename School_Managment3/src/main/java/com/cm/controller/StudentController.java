@@ -228,13 +228,14 @@ public class StudentController {
 	
 	@PostMapping("/alumno/guardar")
 	public ModelAndView saveStudent(@Valid @ModelAttribute("coursePeriod") CoursePeriod cP, BindingResult resultadoValidacion) {
-		ModelAndView modelV;
 		if(resultadoValidacion.hasErrors()){
-			modelV = new ModelAndView("form-student");	
+			ModelAndView modelV=new ModelAndView("form-student");
+			modelV.addObject("coursePeriod", coursePeriod);
+			modelV.addObject("courses", courseService.showCourses());
 			System.out.println("holaaaaaaa");
 			return modelV;
 		}else {
-			modelV = new ModelAndView("redirect:/home");
+			ModelAndView modelV = new ModelAndView("redirect:/home");
 			student=cP.getStudent();
 			student.setStatus("Cursando");
 			student.setDateOfInscription(LocalDate.now());

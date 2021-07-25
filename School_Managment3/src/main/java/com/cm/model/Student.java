@@ -41,9 +41,10 @@ public class Student {
 
 	@Min(value = 1000000,message = "El DNI debe ser mayor o igual a 1000000 digitos")
 	@Max(value = 999999999,message = "El DNI debe ser menor o igual a 999999999 digitos")
+	@NotNull(message="Debe seleccionar un apellido")
 	private long dni;
 
-	@NotBlank(message = "Debe ingresar una fecha valida")
+	@NotNull(message = "Debe ingresar una fecha valida")
 	@Past
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;

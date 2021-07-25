@@ -48,12 +48,14 @@ public class CourseController {
 	@PostMapping("/curso/guardar")
 	public ModelAndView saveCourse(@Valid @ModelAttribute("course")Course course, BindingResult resultadoValidacion) {
 
-		if(resultadoValidacion.hasErrors()){
-			ModelAndView modelV=new ModelAndView("form-course");	
-			return modelV;
-		}else {
+		if(courseService.findRepeats(course.getName(), course.getDivision(), course.getCiclo(), course.getTurn()).isEmpty()){
+			
 			ModelAndView modelV=new ModelAndView("redirect:/home");
 			courseService.saveCourse(course);
+			return modelV;
+		}else {
+			ModelAndView modelV=new ModelAndView("form-course");	
+			modelV.addObject("course",course); 
 			return modelV;
 		}
 	}
