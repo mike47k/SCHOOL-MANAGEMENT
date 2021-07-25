@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cm.model.CoursePeriod;
 import com.cm.model.Exam;
@@ -227,7 +228,7 @@ public class StudentController {
 
 	
 	@PostMapping("/alumno/guardar")
-	public ModelAndView saveStudent(@Valid @ModelAttribute("coursePeriod") CoursePeriod cP, BindingResult resultadoValidacion) {
+	public ModelAndView saveStudent(@Valid @ModelAttribute("coursePeriod") CoursePeriod cP, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		if(resultadoValidacion.hasErrors()){
 			ModelAndView modelV=new ModelAndView("form-student");
 			modelV.addObject("coursePeriod", coursePeriod);
@@ -235,7 +236,7 @@ public class StudentController {
 			System.out.println("holaaaaaaa");
 			return modelV;
 		}else {
-			ModelAndView modelV = new ModelAndView("redirect:/home");
+			ModelAndView modelV = new ModelAndView("redirect:/alumno");
 			student=cP.getStudent();
 			student.setStatus("Cursando");
 			student.setDateOfInscription(LocalDate.now());
@@ -260,7 +261,7 @@ public class StudentController {
 			noteService.saveNotes(notes);
 			
 			
-			
+			attribute.addFlashAttribute("success", "Alumno guardado con éxito");
 			return modelV;
 		}
 

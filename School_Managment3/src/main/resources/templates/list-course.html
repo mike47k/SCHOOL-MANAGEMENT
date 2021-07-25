@@ -12,7 +12,12 @@
 	</div>
 	
 	 <main class="main">
-        <div class="u-wrapper">            
+        <div class="u-wrapper">   
+			<!--MENSAJE SUCCESS-->            
+            <div class="alert alert-success" id="alert-dismissable" th:if="${success != null}">
+                <p th:text="${success}"></p>                
+                <i id="close-alert" class="fas fa-times close"></i>   
+            </div>         
             <h3 class="form-title">Cursos disponibles</h3>
             <div class="card-container">
 	            <div class="card" th:each="cos : ${courses}">

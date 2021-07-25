@@ -340,6 +340,28 @@ input, select, textarea {
     box-sizing: border-box;
     margin-top: .3rem;
 }
+.alert {
+    border-radius: .25rem;
+    border: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .3rem;
+    padding-left: .7rem;
+    margin-bottom: .5rem;
+}
+.alert-dn {
+    display: none;
+}
+.alert-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+.alert .close {
+    align-self: flex-start;
+    cursor: pointer;
+}
 @media screen and (min-width: 768px) {
     .card-container {
         flex-wrap: wrap;

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cm.model.Course;
 import com.cm.model.CoursePeriod;
@@ -68,7 +69,7 @@ public class SubjectController {
 	}
 	
 	@PostMapping("/materia/guardar")
-	public ModelAndView saveSubject(@Valid @ModelAttribute("form") Form form, BindingResult resultadoValidacion) {
+	public ModelAndView saveSubject(@Valid @ModelAttribute("form") Form form, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 		System.out.println("Nombre :"+form.getCourse().getName());
 		if(resultadoValidacion.hasErrors()){
 			ModelAndView modelV=new ModelAndView("form-subject");	
@@ -76,7 +77,7 @@ public class SubjectController {
 			modelV.addObject("courses",courseService.showCourses());
 			return modelV;
 		}else {
-			ModelAndView modelV=new ModelAndView("redirect:/home");
+			ModelAndView modelV=new ModelAndView("redirect:/materia");
 			Subject newSubject = subjectService.saveSubject(form.getSubject());
 			
 			
@@ -112,7 +113,7 @@ public class SubjectController {
 					
 			
 			
-			
+			attribute.addFlashAttribute("success", "Materia guardada con éxito");
 			return modelV;
 		}
 

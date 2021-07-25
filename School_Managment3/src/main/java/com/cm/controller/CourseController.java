@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cm.model.Course;
 import com.cm.model.CoursePeriod;
@@ -46,12 +47,13 @@ public class CourseController {
 	}
 	
 	@PostMapping("/curso/guardar")
-	public ModelAndView saveCourse(@Valid @ModelAttribute("course")Course course, BindingResult resultadoValidacion) {
+	public ModelAndView saveCourse(@Valid @ModelAttribute("course")Course course, BindingResult resultadoValidacion, RedirectAttributes attribute) {
 
 		if(courseService.findRepeats(course.getName(), course.getDivision(), course.getCiclo(), course.getTurn()).isEmpty()){
 			
-			ModelAndView modelV=new ModelAndView("redirect:/home");
+			ModelAndView modelV=new ModelAndView("redirect:/curso");
 			courseService.saveCourse(course);
+			attribute.addFlashAttribute("success", "Curso guardado con éxito");
 			return modelV;
 		}else {
 			ModelAndView modelV=new ModelAndView("form-course");	
